@@ -1,5 +1,5 @@
 %  ========================================================================
-%  Copyright (c) 1985 The University of Washington
+%  Copyright (c) 1995-2014 The University of Washington
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -14,873 +14,842 @@
 %  limitations under the License.
 %  ========================================================================
 %
-
-% Documentation for University of Washington thesis LaTeX document class
+%
+% University of Washington Thesis class
 % by Jim Fox
 % fox@washington.edu
 %
-%    Revised for version 2015/03/03 of uwthesis.cls
-%    Revised, 2016/11/22, for cleanup of sample copyright and title pages
+%    For the most recent edition of this class file see:
+%         http://staff.washington.edu/fox/tex/
+%    or
+%         https://github.com/UWIT-IAM/UWThesis.git
 %
-%    This document is contained in a single file ONLY because
-%    I wanted to be able to distribute it easily.  A real thesis ought
-%    to be contained on many files (e.g., one for each chapter, at least).
 %
-%    To help you identify the files and sections in this large file
-%    I use the string '==========' to identify new files.
+% Version history
 %
-%    To help you ignore the unusual things I do with this sample document
-%    I try to use the notation
-%       
-%    % --- sample stuff only -----
-%    special stuff for my document, but you don't need it in your thesis
-%    % --- end-of-sample-stuff ---
-
-
-%    Printed in twoside style now that that's allowed
+% 9.03,05/21/19, use \everypar in \@makefntext
+% 9.02,11/22/16, minor changes to style to more closely follow grad school guidelines ( something else )
+% 9.01,03/03/15, rename singlespace to uwsinglespace so no collision with setspace style
+% 9.00,11/13/14, modify for proquest style.  Adjust sample thesis appropriately
+% 8.04,03/06/14, return multi-page abstract to two sided
+% 8.03,06/19/12, fix textofChair for co-chairs
+% 8.02,04/02/12, Slight mods to fixup title and other fornt pages
+% 8.01,03/21/12, Slight modification to title pages
+% 8.00,02/03/12, Revise for electronic submission.  Revised title, no signature nor quoteslip
+% 7.00,06/27/11, Fix output page bug, add copyright page
+% 6.14,07/24/08, Remove large font from abstract title
+% 6.14,04/15/08, Re-Fix first page bottom margin; raise quote slip 
+% 6.13,03/31/08, Fix first page bottom margin; 
+% 6.12,03/21/07, Better handling of label inside footnote with chapternotes
+% 6.11,08/02/06, Bold "abstract", "Page" heading on toc
+% 6.10,10/25/05, Fix co-chair lines
+% 6.9, 10/25/05, Several small changes for 2005 style guide
+% 6.8, 07/26/05, Add some single-spacing in prelim pages
+% 6.7, 06/29/05, Remove "by" from abstract page
+% 6.6, 06/08/05, Change signature page baseline to 1.0
+% 6.5, 03/10/05, Change bibliography baseline to 1.0
+% 6.4, 03/09/05, Quote slip copy to "Proquest Information and Learning"
+% 6.3, 09/22/04, Add column titles to lof and lot
+% 6.2, 07/23/04, Lowercase 'doctoral' in quote slip
+% 6.1, 07/08/04, Allow option 'natbib' to load natbib package correctly
+% 6.0, 07/14/03, Change names: thesis.xxx -> uwthesis.xxx
+% 5.8, 06/12/03, Minor changes to the endnotes pagenation
+% 5.7, 08/14/00, Minor changes to the quote slip
+% 5.6, 06/19/00, 'Doctorial' -> 'Doctoral'
+% 5.5, 05/30/00, New text for quote slips (and 'doctorial' -> 'doctoral') 
+% 5.4, 10/29/99, Add \xtrafullpage for oneside fullpage figures
+% 5.3, 08/09/99, Correct spelling errors in quote slips
+% 5.2, 07/20/99, Allow 10pt, 11pt, and 12pt class options
+% 5.1, 02/08/99, Add \thesissignaturepage
+% 5.0, 01/05/99, Modify for revised uw grad school guidelines
 %
- 
-\documentclass [11pt, proquest] {uwthesis}[2016/11/22]
- 
+% 4.8, 10/22/98, Allow multi-page abstract
+%                Allow co-chairs
+%                Fix single-sided facing pages (for new latex)
+% 4.7, 8/19/98,  Set caption text back to normal size
+% 4.6, 3/11/98,  Add default-text quoteslip macros
+% 4.5, 7/14/97,  fix \@makefntext to work in math mode
+% 4.4, 5/13/97,  change margin calculations (allows non-letter paper)
+%                minor reformatting of abstract
+%                provide single-spaced captions, footnotes, and quotes
+% 4.3, 2/13/97,  allow \\ in text (bug fix)
+% 4.2, 8/12/96,  added \@normalsize for setspace.sty (and others?)
+% 4.1, 11/6/95,  no page numbers on chapter start for oneside printing
 %
-% The following line would print the thesis in a postscript font 
-
-% \usepackage{natbib}
-% \def\bibpreamble{\protect\addcontentsline{toc}{chapter}{Bibliography}}
-
-\setcounter{tocdepth}{1}  % Print the chapter and sections to the toc
- 
-
-% ==========   Local defs and mods
-%
-
-% --- sample stuff only -----
-% These format the sample code in this document
-
-\usepackage{alltt}  % 
-\newenvironment{demo}
-  {\begin{alltt}\leftskip3em
-     \def\\{\ttfamily\char`\\}%
-     \def\{{\ttfamily\char`\{}%
-     \def\}{\ttfamily\char`\}}}
-  {\end{alltt}}
- 
-% metafont font.  If logo not available, use the second form
-%
-% \font\mffont=logosl10 scaled\magstep1
-\let\mffont=\sf
-% --- end-of-sample-stuff ---
- 
-
-
-
-\begin{document}
- 
-% ==========   Preliminary pages
-%
-% ( revised 2012 for electronic submission )
+% Documentation is in the companion document (uwthesis.tex)
 %
 
-\prelimpages
+\ProvidesClass{uwthesis}[2016/11/22]
+\NeedsTeXFormat{LaTeX2e}
  
 %
-% ----- copyright and title pages
-%
-\Title{The Suitability of the \LaTeX\ Text Formatter\\
-  for Thesis Preparation by Technical and\\
-  Non-technical Degree Candidates}
-\Author{Jim Fox}
-\Year{2016}
-\Program{IT Infrastructure}
-
-\Chair{Name of Chairperson}{Title of Chair}{Department of Chair}
-\Signature{First committee member}
-\Signature{Next committee member}
-\Signature{etc}
-
-\copyrightpage
-
-\titlepage  
-
- 
-%
-% ----- signature and quoteslip are gone
+% footnote stuff for option processing
 %
 
-%
-% ----- abstract
-%
+\newwrite\tf@not
 
+\newif\ifproquest\proquestfalse
+\DeclareOption{proquest}% sets electrons-only, proquest style
+  {\proquesttrue}
 
-\setcounter{page}{-1}
-\abstract{%
-This sample dissertation is an aid to students who are attempting
-to format their theses with \LaTeX, a sophisticated
-text formatter widely used by mathematicians and scientists everywhere.
- 
-\begin{itemize}
-\item It describes the use of a specialized
-macro package developed specifically for thesis production
-at the University.
-The macros customize \LaTeX\ for the correct thesis style,
-allowing the student to concentrate on the substance of
-his or her text.%
-\footnote{See Appendix A to obtain the source to this
- thesis and the class file.}
-\item It demonstrates the solutions to a variety of
-formatting challenges found in thesis production.
-\item It serves as a template for a real dissertation.
-\end{itemize}
-}
- 
-%
-% ----- contents & etc.
-%
-\tableofcontents
-\listoffigures
-%\listoftables  % I have no tables
- 
-%
-% ----- glossary 
-%
-\chapter*{Glossary}      % starred form omits the `chapter x'
-\addcontentsline{toc}{chapter}{Glossary}
-\thispagestyle{plain}
-%
-\begin{glossary}
-\item[argument] replacement text which customizes a \LaTeX\ macro for
-each particular usage.
-\item[back-up] a copy of a file to be used when catastrophe strikes
-the original.  People who make no back-ups deserve
-no sympathy.
-\item[control sequence] the normal form of a command to \LaTeX.
-\item[delimiter] something, often a character, that indicates
-the beginning and ending of an argument.
-More generally, a delimiter is a field separator.
-\item[document class] a file of macros that tailors \LaTeX\ for
-a particular document.  The macros described by this thesis
-constitute a document class.
-\item[document option] a macro or file of macros
-that further modifies \LaTeX\ for
-a particular document.  The option {\tt[chapternotes]}
-constitutes a document option.
-\item[figure] illustrated material, including graphs,
-diagrams, drawings and photographs.
-\item[font] a character set (the alphabet plus digits
-and special symbols) of a particular size and style.  A couple of fonts
-used in this thesis are twelve point roman and {\sl twelve point roman
-slanted}.
-\item[footnote] a note placed at the bottom of a page, end of a chapter,
-or end of a thesis that comments on or cites a reference
-for a designated part of the text.
-\item[formatter] (as opposed to a word-processor) arranges printed
-material according to instructions embedded in the text.
-A word-processor, on the other hand, is normally controlled
-by keyboard strokes that move text about on a display.
-\item[\LaTeX] simply the ultimate in computerized typesetting.
-\item[macro]  a complex control sequence composed of 
-other control sequences.
-\item[pica] an archaic unit of length.  One pica is twelve points and
-six picas is about an inch.
-\item[point] a unit of length.  72.27 points equals one inch.
-\item[roman]  a conventional printing typestyle using serifs.
-the decorations on the ends of letter strokes.
-This thesis is set in roman type.
-\item[rule] a straight printed line; e.g., \hrulefill.
-\item[serif] the decoration at the ends of letter strokes.
-\item[table] information placed in a columnar arrangement.
-\item[thesis] either a master's thesis or a doctoral dissertation.
-This document also refers to itself as a thesis, although it
-really is not one.
- 
-\end{glossary}
- 
-%
-% ----- acknowledgments
-%
-\acknowledgments{% \vskip2pc
-  % {\narrower\noindent
-  The author wishes to express sincere appreciation to
-  University of Washington, where he has had the opportunity
-  to work with the \TeX\ formatting system,
-  and to the author of \TeX, Donald Knuth, {\it il miglior fabbro}.
-  % \par}
-}
+\newif\ifendnotes      % true if doing endnotes
+  \endnotesfalse
+\newif\ifchapternotes  % true if doing chapternotes
+  \chapternotesfalse
+\let\printchapternotes\relax
+\let\printendnotes\relax
+
+\DeclareOption{widebindingmargin}% selects ProQuest style
+  {\widebindingmargintrue}  % is the default
+
+\DeclareOption{footnotes}% selects bottom-of-page notes (default)
+  {}
+\DeclareOption{chapternotes}% selects end-of-chapter notes
+  {\chapternotestrue}
+\DeclareOption{endnotes}% selects end-of-thesis notes
+  {\endnotestrue}
 
 %
-% ----- dedication
+% ----  Timely loading of specific packages -----------------------------
 %
-\dedication{\begin{center}to my dear wife, Joanna\end{center}}
+\newif\if@natbib      % true if including natbib
+  \@natbibfalse
+\DeclareOption{natbib}% includes natbib package
+  {\@natbibtrue}
 
 %
-% end of the preliminary pages
- 
- 
- 
-%
-% ==========      Text pages
+% ----  Thesis is a modified (default 12pt) book style  -----------------
 %
 
-\textpages
- 
-% ========== Chapter 1
- 
-\chapter {Introduction}
- 
-The utility of a clean, professionally prepared thesis is well
-documented%
-\footnote{See, for example,
-  W.~Shakespeare\cite{Hamlet} for a recent discussion.}
-and, even if you never intend to actually print your thesis,
-you still ought to format it as if that were your intention.
- 
-\TeX\ facilitates that. It is a flexible,
-complete and professional typesetting system.
-It will produce {\bf pdf} output as required by the Graduate School.
+\def\@f@ntsize{12pt}
+\DeclareOption{10pt}{\def\@f@ntsize{10pt}}
+\DeclareOption{11pt}{\def\@f@ntsize{11pt}}
+\DeclareOption{12pt}{\def\@f@ntsize{12pt}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 
-\section{The Purpose of This Sample Thesis}
- 
-This sample is both a demonstration of the quality and
-propriety of a \LaTeX formatted thesis and  
-documentation for its preparation.
-It has made extensive use of a custom class file
-developed specifically for this purpose
-at the University of Washington.  Chapter~II discusses
-\TeX\ and \LaTeX.
-Chapter III describes the additional macros and functions
-provided by the custom thesis class file.  Finally, Chapter IV hopes to tie things up.
- 
-It is 
-impossible to predict all the formatting problems one will encounter
-and there will be problems that are best handled
-by a specialist.  
-The Graduate School may be able to help you find help.
-Some departments may also be able to provide \LaTeX\ assistance.
- 
- 
-\section{Conventions and Notations}
- 
-In this thesis the typist
-refers to the user of \LaTeX---the one who
-makes formatting decisions and chooses the appropriate
-formatting commands.
-He or she will most often be the degree candidate.
- 
-This document deals with \LaTeX\ typesetting commands and their
-functions.  Wherever possible the conventions used to display
-text entered by the typist and the resulting formatted output
-are the same as those used by the \TeX books.
-Therefore, {\tt typewriter type} is used to indicate text
-as typed by the computer
-or entered by the typist.
-It is quite the opposite of {\it italics,} which indicates
-a category rather than exact text.  For example,
-{\tt alpha} and {\tt beta} might each be an example of a {\it label}.
- 
- 
-\section{Nota bene}
- 
-This sample thesis was produced by the \LaTeX\ document class it describes
-and its format is consonant with the Graduate School's electronic dissertation guidelines,
-as of November, 2014, at least.
-However, use of this package does not guarantee acceptability
-of a particular thesis.
- 
- 
-% ========== Chapter 2
- 
-\chapter{A Brief \\ Description of \protect\TeX}
- 
-The \TeX\ formatting program is the creation of
-Donald Knuth of Stanford University.
-It has been implemented on nearly every general purpose computer and
-produces exactly the same copy on all machines.
- 
-\section{What is it; why is it spelled that way; 
-and what do
-really long section titles look like in the text and in the
-Table of Contents?}
- 
-\TeX\ is a formatter.  A document's format is controlled
-by commands embedded in the text.  
-\LaTeX\ is a special version of \TeX---preloaded
-with a voluminous set of macros that simplify most
-formatting tasks.
- 
-\TeX\ uses {\it control sequences} to control
-the formatting of a document.  These control sequences are usually
-words or groups of letters prefaced with the backslash character
-({\tt\char'134}).
-For example,
-Figure \ref{start-2} shows the text that printed the beginning
-of this chapter.  Note the control sequence \verb"\chapter" that
-instructed \TeX\ to start a new chapter, print the title, and
-make an entry in the table of contents.  It is an example
-of a macro defined by the \LaTeX\ macro package.
-The control sequence \verb"\TeX", which prints the word \TeX,
-is a standard macro from the {\it\TeX book}.
-The short control sequence \verb"\\" in the title instructed \TeX\ to
-break the title line at that point.
-This capability is an example of an extension to \LaTeX\
-provided by the uwthesis document class.
- 
-\begin{figure}
-\begin{demo}
-\uwsinglespace
-\\chapter\{A Brief\\\\Description of \\TeX\}
+\PassOptionsToClass{\@f@ntsize}{book}
+\PassOptionsToClass{openany}{book}
+\ProcessOptions
+\LoadClass{book}
 
-The \\TeX\\ formatting program is the creation of
-Donald Knuth of Stanford University.
-\end{demo}
-\label{start-2}
-\caption{The beginning of the Chapter II text}
-\end{figure}
- 
-Most of the time \TeX\ is simply building paragraphs from
-text in your source files.  No control sequences are involved.
-New paragraphs are indicated by a blank line in the
-input file.
-Hyphenation is performed automatically.
- 
-\section{\TeX books}
- 
-The primary reference for \LaTeX\ is Lamport's second edition
-of the \textit{\LaTeX\ User's Guide}\cite{Lbook}.
-It is easily read and should be sufficient for thesis formatting.
-See also the \textsl{\LaTeX\ Companion}\cite{companion} for descriptions
-of many add-on macro packages.
+\ifproquest
+  \typeout{Formatting for ProQuest}
+  \@twosidefalse
+  \@openrightfalse
+\fi
 
-Although unnecessary for thesis writers, the \textsl{\TeX book}
-is the primary reference for \TeX sperts worldwide.
- 
-\section{Mathematics}
- 
-The thesis class does not expand on \TeX's
-or \LaTeX's
-comprehensive treatment of mathematical equation printing.%
-\label{c2note}\footnote{%
-% a long footnote indeed.
- Although many \TeX-formatted documents contain no
- mathematics except the page numbers, it seems appropriate
- that this paper, which is in some sense about \TeX,
- ought to demonstrate an equation or two.  Here then, is a statement 
- of the {\it Nonsense Theorem}.
- 
- \smallskip
- \def\RR{{\cal R\kern-.15em R}}
- {\narrower\hangindent\parindent Assume a universe $E$ and a symmetric function
-  $\$$ defined on $E$, such that for each $\$^{yy}$ there exists a
-  $\$^{\overline{yy}}$, where $\$^{yy} = \$^{\overline{yy}}$.
-  For each element $i$ of $E$ define
-  ${\cal S}(i)=\sum_i \$^{yy}+\$^{\overline{yy}}+0$.
-  Then if $\RR$ is that subset of $E$ where $1+1=3$,
-  for each $i$
-  $$\lim_{\$\to\infty}\int {\cal S}di =
-      \cases{0,&if $i\not\in\RR$;\cr
-             \infty,&if $i\in\RR$.\cr}$$
-  \par}} % end of the footnote
+\if@natbib
+  \usepackage{natbib}
+\fi
+
 %
-The {\it\TeX book}\cite{book}, {\it \LaTeX\ User's Guide}\cite{Lbook},
-and {\it The \LaTeX\ Companion}\cite{companion}
-thoroughly cover this topic.
- 
- 
-\section{Languages other than English}
- 
-Most \LaTeX\ implementations at the University are tailored
-for the English language.  However, \LaTeX\ will format many
-other languages.  Unfortunately, this author has never been successful in 
-learning more than a smattering of anything other than English.
-Consult your department or the Tex Users Group.
-\smallskip
-\begin{center}
-{\tt http://tug.org/},
-\end{center}
-\smallskip
-for assistance with non-English formatting.
+% ---- page sizes ----------------------------------------------
+%
+% margins are 1 inch (72pt) all around,
+% except possibly 1.5" at binding
+%
+% text size computed from paper size
+%
 
-Unusual characters can be defined via the
-font maker \hbox{\mffont METAFONT} (documented by Knuth\cite{Metafont}).
-The definitions are not trivial.
-Students who attempt to print a thesis with
-custom fonts may soon proclaim,
+\voffset -1in  % undo primitive default margins
+\hoffset -1in
+
+\topmargin 72\p@  
+\headheight 12\p@
+\headsep 36\p@
+\oddsidemargin 108\p@ 
+\ifproquest\oddsidemargin 72\p@\fi
+\oddsidemargin 72\p@ 
+\evensidemargin 72\p@
+\newdimen\botmargin
+\botmargin 72\p@
+\marginparwidth 72\p@
+\marginparsep 7\p@
+\footskip \z@ % set later
+\footnotesep 14\p@
+\parindent 1.5em
+
+\textheight\paperheight
+  \advance\textheight by-\topmargin
+  \advance\textheight by-\headheight
+  \advance\textheight by-\headsep
+  % \advance\textheight by-\footskip
+  \advance\textheight by-\botmargin
+\textwidth\paperwidth
+  \advance\textwidth by-\oddsidemargin
+  \advance\textwidth by-\evensidemargin
+
+% ---------------
+
+% set most text to 'double' space
+\def\baselinestretch{1.5}    % not quite doublespaced
+
+% make it easier to switch to single-space lines in figures, tables, ...
+\def\uwsinglespace{\def\baselinestretch{1.0}\normalfont}
+
+\setcounter{totalnumber}{5}
+\setcounter{topnumber}{5}
+\renewcommand\topfraction{.7}
+\renewcommand\textfraction{.2}
+\setlength\floatsep    {18\p@ \@plus 2\p@ \@minus 4\p@}
+\setlength\textfloatsep{30\p@ \@plus 2\p@ \@minus 4\p@}
+\setlength\intextsep   {20\p@ \@plus 4\p@ \@minus 4\p@}
+\let\@normalsize\normalsize  % retain old definition
+\setlength\abovecaptionskip{10\p@}
+\setlength\belowcaptionskip{10\p@}
+
  
-% Note.  This is not the ideal way to print Greek
-\medskip
-\begin{center}
-``$\mathaccent"7027\alpha\pi o\kern1pt\theta\alpha\nu\epsilon\hat\iota\nu$
-\ $\theta\acute\epsilon\lambda\omega$.''
- 
-\end{center}
- 
-% ========== Chapter 3
- 
-\chapter{The Thesis Unformatted}
- 
-This chapter describes the uwthesis class (\texttt{uwthesis.cls},
-version dated 2014/11/13)
-in detail 
-and shows how it was used to format the thesis.
-A working knowledge of Lamport's \LaTeX\ manual\cite{Lbook} is assumed.
- 
-\section{The Control File}
- 
-The source to this sample thesis is a single file
-only because ease of distribution was a concern.
-You should not do this.  Your task will be much easier if you
-break your thesis into several files:  a file for the preliminary pages,
-a file for each chapter,  one for the glossary, and one for each
-appendix.  Then use a control file to tie them all together.
-This way you can edit and format parts of your thesis much more
-efficiently.
- 
-Figure~\ref{control-file} shows a control file that
-might have produced this thesis.
-It sets the document style, with options and parameters,
-and formats the various parts of the thesis---%
-but contains no text of its own.
- 
- 
-%  control file caption and figure
 %
+%  ----  Footnotes  ------------------------------------------
 %
-\begin{figure}[p]
- \begin{fullpage}
-  \uwsinglespace
-  \begin{verbatim}
-    % LaTeX thesis control file
- 
-    \documentclass [11pt, proquest]{uwthesis}[2014/11/13]
- 
-    \begin{document}
- 
-    % preliminary pages
-    %
-    \prelimpages
-    \include{prelim}
- 
-    % text pages
-    %
-    \textpages
-    \include{chap1}
-    \include{chap2}
-    \include{chap3}
-    \include{chap4}
- 
-    % bibliography
-    %
-    \bibliographystyle{plain}
-    \bibliography{thesis}
- 
-    % appendices
-    %
-    \appendix
-    \include{appxa}
-    \include{appxb}
- 
-    \include{vita} 
-    \end{document}
-  \end{verbatim}
-  \caption[A thesis control file]%
-   {\narrower A thesis control file ({\tt thesis.tex}).
-   This file is the input to \LaTeX\ that will produce a
-   thesis.  It contains no text, only commands which
-   direct the formatting of the thesis.
+% Footnote placement option
+%
+%   [endnotes] put the references at the thesis end
+%   [chapternotes] put the references at the chapter end
+%   [footnotes] put the references at the page bottom
+%
+%   When text is written to file (.not) the source linebreaks
+%   are maintained.  This keeps the individual lines in the file short.
+%   Control sequences in the note text are not expanded.
+%
+
+\let\n@teitem\relax
+\def\@n@teitem#1{\def\@currentlabel{#1}\item[#1]}
+
+\def\@chapternotetext{\begingroup
+  \catcode`\^^M=12\newlinechar=`\^^M
+  \catcode`\\=12
+  \d@chapternote}
+
+\long\def\d@chapternote#1{%
+  \immediate \write\tf@not
+      {\n@teitem{\note@label} #1\relax}%
+  \endgroup}
+
+%
+\def\@startnotes{%  opens the .not file
+  \immediate \openout\tf@not\jobname.not\relax
+  \immediate \write\tf@not{\relax}
+  \setcounter{footnote}{0}}
+
+%
+% chapternotes
+%
+
+\ifchapternotes
+  % \typeout{Doing chapternotes}
+  \let\@footnotetext\@chapternotetext
+  \@startnotes
+  \def\note@label{\arabic{footnote}}
+  \def\printchapternotes{% Prints the accumulated notes
+    \ifnum\c@footnote>0
+      \clearpage
+      \begin{center} Notes to Chapter \arabic{chapter} \end{center}\par
+      \addcontentsline{toc}{section}{\protect
+          \numberline{}{Notes to Chapter \arabic{chapter}}}
+      \begin{description}
+      \immediate\closeout\tf@not
+      \catcode`@=11
+      \let\n@teitem\@n@teitem
+      \@input{\jobname.not}
+      \end{description}
+      \clearpage
+      \@startnotes
+    \fi
+  }
+  \let\old@enddocument\enddocument
+  \def\enddocument{\printchapternotes\old@enddocument}
+\fi
+
+%
+% endnotes
+%
+
+\ifendnotes
+  % \typeout{Doing endnotes}
+  \let\@footnotetext\@chapternotetext
+  \@startnotes
+  \def\note@label{\arabic{chapter}.\arabic{footnote}}
+  \def\printendnotes{% Prints the accumulated notes
+    \chapter*{Notes}
+    \addcontentsline{toc}{chapter}{Notes}
+    \thispagestyle{empty}
+    \begin{description}
+    \immediate\closeout\tf@not
+    \catcode`@=11
+    \let\n@teitem\@n@teitem
+    \@input{\jobname.not}
+    \end{description}
+    \@startnotes  % allows multiple endnotes
    }
-  \label{control-file}
- \end{fullpage}
-\end{figure}
- 
-The first section, from the \verb"\documentclass" to
-the \verb"\begin{document}", defines the document class and options.
-This sample thesis specifies the \texttt{proquest} style, which is now
-required by the Graduate School and is the default.  
-Two other, now dated, other styles are available:  \verb"twoside", which is similar but 
-produces a wider binding margin and is more suitable for paper printing; and
-\verb"oneside", which is really old fashoned.
-This sample also specified a font size
-of 11 points. 
-Possible font size options are: \verb"10pt", \verb"11pt", and \verb"12pt".
-Default is 12 points, which is the preference
-of the Graduate School. If you choose a smaller size be sure to
-check with the Graduate School for acceptability.  The smaller fonts
-can produce very small sub and superscripts.
-
-Include most additional formatting packages with \verb"\usepackage",
-as describe by Lamport\cite{Lbook}.  The one exception to this
-rule is the \verb"natbib" package.  Include it with the \verb"natbib"
-document option.
- 
-Use the \verb"\includeonly" command to format only a part of your
-thesis.  See Lamport\cite[sec. 4.4]{Lbook} for usage and limitations.
-
- 
-\section{The Text Pages}
- 
-A chapter is a major division of the thesis.  Each chapter begins
-on a new page and has a Table of Contents entry.
- 
-\subsection{Chapters, Sections, Subsections, and Appendices}
- 
- 
-Within the chapter title use a \verb"\\" control sequence to separate lines
-in the printed title (recall Figure \ref{start-2}.).
-The \verb"\\" does not affect the Table of Contents entry.
- 
-Format appendices just like chapters.
-The control sequence \verb"\appendix" instructs \LaTeX\ to
-begin using the term `Appendix' rather than `Chapter'.
- 
- 
-Specify sections and subsections of a chapter 
-with  \verb"\section" and \verb"\subsection", respectively.
-In this thesis chapter and section
-titles are written to the table of contents.
-Consult Lamport\cite[pg. 176]{Lbook} to see which
-subdivisions of the thesis can be written to the table of contents.
-The \verb"\\" control sequence is not permitted in section and
-subsection titles.
- 
- 
-\subsection{Footnotes}
- 
-\label{footnotes}
- Footnotes format as described in the \LaTeX\ book.  You can also
- ask for end-of-chapter or end-of-thesis notes.
- The thesis class will automatically set these up if
- you ask for the document class option \texttt{chapternotes}
- or \texttt{endnotes}.  
- 
-If selected, chapternotes will print automatically.  If you choose
-endnotes however you must explicitly indicate when to print the notes 
-with the command \verb"\printendnotes".  See the style guide for
-suitable endnote placement.  
-
-\subsection{Figures and Tables}
-Standard \LaTeX\ figures and tables, see Lamport\cite[sec.~C.9]{Lbook},
-normally provide the most convenient means to position the figure.
-Full page floats and facing captions are exceptions to this rule.
-
-If you want a figure or table to occupy a full page enclose the
-contents in a \texttt{fullpage} environment.  
-See figure~\ref{facing-caption}.
-
-\subsubsection{Facing pages}
-Facing page captions are an artifact of traditional, dead-tree printing,
-where a left-side (even) page faces a right-side (odd) page.
-
-In the \texttt{twoside} style, a facing caption
-is full page caption for a full page figure or table
-and should face the illustration to which it refers.
-You must explicitly format both pages. 
-The caption part appears on an even page
-(left side) and the figure or table
-comes on the following odd page (right side).
-Enclose the float contents for the caption 
-in a \texttt{leftfullpage} environment,
-and enclose the float contents for the figure or table 
-in a \texttt{fullpage} environment.
-The first page (left side) contains the caption. The second page
-(right side) could be left blank.  A picture or graph might be pasted onto
-this space. See figure~\ref{facing-caption}.
-
-
-\begin{figure}[t]
-\uwsinglespace
-\begin{verbatim}
-     \begin{figure}[p]% the left side caption
-       \begin{leftfullpage}
-         \caption{ . . . }
-       \end{leftfullpage}
-     \end{figure}
-     \begin{figure}[p]% the right side space
-       \begin{fullpage}
-          . . .
-          ( note.. no caption here )
-       \end{fullpage}
-     \end{figure}
-\end{verbatim}
-\caption[Generating a facing caption page]{This text would create a
-  double page figure in the two-side styles. }
-\label{facing-caption}
-\end{figure}
- 
-You can use these commands with the \texttt{proquest} style, but they have little
-effect on online viewing.
- 
- 
-\subsection{Horizontal Figures and Tables}
-Figures and tables may be formatted horizontally
-(a.k.a.\ landscape) as long as their captions appear
-horizontal also.  \LaTeX\ will format landscape material for you.
-
-Include the \texttt{rotating} package 
-\begin{demo}
-\\usepackage[figuresright]\{rotating\}
-\end{demo}
-and read the documentation that comes with the package. 
-
-Figure~\ref{sideways} is an example of how a landscape
-table might be formatted. 
-
-\begin{figure}[t]
-\uwsinglespace
-\begin{verbatim}
-     \begin{sidewaystable}
-         ...
-         \caption{ . . . }
-     \end{sidewaystable}
-\end{verbatim}
-\caption[Generating a landscape table]{This text would create a
-  landscape table with caption.}
-\label{sideways}
-\end{figure}
- 
-
-
-\subsection{Figure and Table Captions}
-Most captions are formatted with the \verb"\caption" macro as described 
-by Lamport\cite[sec. C.9]{Lbook}. 
-The uwthesis class extends this macro to allow
-continued figures and tables, and to provide multiple figures and
-tables with the same number, e.g., 3.1a, 3.1b, etc.
- 
-To format the caption for the first part of
-a figure or table that cannot fit
-onto a single page use the standard form:
-\begin{demo}
-\\caption[\textit{toc}]\{\textit{text}\}
-\end{demo}
-To format the caption for the subsequent parts of 
-the figure or table 
-use this caption:
-\begin{demo}
-\\caption(-)\{(continued)\}
-\end{demo}
-It will keep the same number and the text of the caption will be 
-{\em(continued)}.
-
-To format the caption for the first part of
-a multi-part figure or table
-use the format:
-\begin{demo}
-\\caption(a)[\textit{toc}]\{\textit{text}\}
-\end{demo}
-The figure or table will be lettered (with `a') as well as numbered.
-To format the caption for the subsequent parts of 
-the multi-part figure or table
-use the format:
-\begin{demo}
-\\caption(\textit{x})\{\textit{text}\}
-\end{demo}
-where {\em x} is {\tt b}, {\tt c}, \ldots.
-The parts will be lettered (with `b', `c', \ldots).
-
-\subsection{Line spacing}
-
-Normally line spacing will come out like it should. However, the 
-ProQuest style allows single spacing in certain situations:
-figure content, some lists, and etc.
-Use \verb"\uwsinglespace" to switch to single spacing within
-a \verb"\begin{}" and \verb"\end{}" block.
-The code examples in this document does this. 
-
-\section{The Preliminary Pages}
- 
-These are easy to format only because they are relatively invariant
-among theses.  Therefore the difficulties have already been encountered
-and overcome by \LaTeX\ and the thesis document classes.
-
-Start with the definitions that describe your thesis.
-This sample thesis was printed with the parameters:
-
-\begin{demo}
-\\Title\{The Suitability of the \\LaTeX\\ Text Formatter\\\\
-   for Thesis Preparation by Technical and\\\\
-   Non-technical Degree Candidates\}
-\\Author\{Jim Fox\}
-\\Program\{IT Infrastructure\}
-\\Year\{2012\}
-
-\\Chair\{Name of Chairperson\}\{title\}\{Chair's department\}
-\\Signature\{First committee member\}
-\\Signature\{Next committee member\}
-\\Signature\{etc\}
-
-\end{demo}
- 
-Use two or more \verb"\Chair" lines if you have co-chairs.
- 
-\subsection{Copyright page}
-Print the copyright page with \verb"\copyrightpage".
-
-\subsection{Title page}
-Print the title page with \verb"\titlepage".
-The title page of this thesis was printed with%
- 
-\begin{demo}
-\\titlepage
-\end{demo}
- 
-You may change default text on the title page with these
-macros.  You will have to redefine \verb"\Degreetext", for instance,
-if you're writing a Master's thesis instead of a dissertation.\footnote{If you use these they can
-be included with the other information before \\copyrightpage".}
-
-\begin{list}{}{\itemindent\parindent\itemsep0pt
-   \def\makelabel#1{\texttt{\char`\\#1}\hfill}\uwsinglespace}
-\item[Degree\char`\{{\it degree name}\char`\}]
-   defaults to ``Doctor of Philosophy''
-\item[School\char`\{{\it school name}\char`\}] defaults to
-``University of Washington''
-\item[Degreetext\char`\{{\it degree text}\char`\}] defaults to
-``A dissertation submitted \ldots''
-\item[textofCommittee\char`\{{\it committee label}\char`\}] defaults to
-``Reading Committee:''
-\item[textofChair\char`\{{\it chair label}\char`\}] defaults to
-``Chair of the Supervisory Committee:''
-\end{list}
-
-These definitions must appear \underline{before} the \verb"\titlepage" command.
-
- 
-\subsection{Abstract}
-Print the
-abstract with \verb"\abstract".
-It has one argument, which is the text of the abstract.
-All the names have already been defined.
-The abstract of this thesis was printed with
- 
-\begin{demo}
-\\abstract\{This sample . . . `real' dissertation.\}
-\end{demo}
- 
- 
-\subsection{Tables of contents}
-Use the standard \LaTeX\ commands to format these items.
- 
- 
-\subsection{Acknowledgments}
-Use the \verb"\acknowledgments" macro to format the acknowledgments page.
-It has one argument, which is the text of the acknowledgment.
-The acknowledgments of this thesis was printed with
- 
-\begin{demo}
-\\acknowledgments\{The author wishes . . . \{\\it il miglior fabbro\}.\\par\}\}
-\end{demo}
- 
- 
-\subsection{Dedication}
-Use the \verb"\dedication" macro to format the dedication page.
-It has one argument, which is the text of the dedication.
- 
-\subsection{Vita}
-Use the \verb"\vita" macro to format the curriculum vitae.
-It has one argument, which chronicles your life's accomplishments.
-
-Note that the Vita is not really a preliminary page.
-It appears at the end of your thesis, just after the appendices.
- 
- 
-%%  
-%% \section{Customization of the Macros}
-%%  
-%% Simple customization, including 
-%% alteration of default parameters,  changes to dimensions,
-%% paragraph indentation, and margins, are not too difficult.
-%% You have the choice of modifying the class file ({\tt uwthesis.cls})
-%% or loading
-%% one or more personal style files to customize your thesis.
-%% The latter is usually most convenient, since you do not need
-%% to edit the large and complicated class file.
-%% 
- 
-
-
-% ========== Chapter 4
- 
-\chapter{Running \LaTeX\\
-  ({\it and printing if you must})}
- 
- 
-From a given source \TeX\ will produce exactly the same document
-on all computers and, if needed, on all printers.  {\it Exactly the same}
-means that the various spacings, line and page breaks, and
-even hyphenations will occur at the same places.
-
-How you edit your text files and run \LaTeX\ varies
-from system to system and depends on your personal preference.
-
-\section{Running}
-
-The author is woefully out of his depth where 
-\TeX\ on Windows is concerned.  Google would be his resource.
-On a linux system he types
-
-\begin{demo}
-\$\ pdflatex uwthesis
-\end{demo}
-
-and it generally works.
-
- 
-\section{Printing}
- 
-All implementations of \TeX\ provide the option of {\bf pdf} output,
-which is all the Graduate School requires.  Even if you intend to
-print a copy of your thesis create a 
-{\tt pdf}.  It will print most anywhere.
-
-\printendnotes
+\fi
 
 %
-% ==========   Bibliography
+%  bottom-of-page footnotes format
+%  full width line and hanging indent
 %
-\nocite{*}   % include everything in the uwthesis.bib file
-\bibliographystyle{plain}
-\bibliography{uwthesis}
+\def\footnoterule{\kern-3\p@
+ \hrule width \columnwidth \kern 2.6\p@}
+\long\def\@makefntext#1{\parindent 1em\noindent \hangindent\parindent
+ \uwsinglespace
+ \everypar{\hb@xt@1em{\hss} \hangindent\parindent}
+ \hb@xt@1.8em{\hss\@makefnmark}#1}
+ 
 %
-% ==========   Appendices
+%  ----  Text pages  ----------------------------------
 %
-\appendix
-\raggedbottom\sloppy
+%  In two-sided style Chapter 1 is right handed
+%
+\def\textofChapter#1{\gdef\@textofChapter{#1}}  \textofChapter{Chapter}
+\def\textofAppendix#1{\gdef\@textofAppendix{#1}}  \textofAppendix{Appendix}
+
+\def\textpages{% Start of text pages
+     \advance\textheight by\footskip % has to be done before the clearpage
+   \clearpage
+   \pagestyle{empty}
+   \cleardoublepage
+   \pagestyle{myheadings}\markboth{}{}
+   \def\@chapapp{\protect\@textofChapter}
+   \def\Thechapter{\arabic{chapter}}
+   \pagenumbering{arabic}
+     \footskip\z@
+   }
  
-% ========== Appendix A
+\def\appendix{\par
+ \setcounter{chapter}{0}
+ \setcounter{section}{0}
+ \def\@chapapp{\protect\@textofAppendix}
+ \def\Thechapter{\Alph{chapter}}
+ \def\thechapter{\Alph{chapter}}}
  
-\chapter{Where to find the files}
  
-The uwthesis class file, {\tt uwthesis.cls}, contains the parameter settings,
-macro definitions, and other \TeX nical commands which
-allow \LaTeX\ to format a thesis.  
-The source to
-the document you are reading, {\tt uwthesis.tex},
-contains many formatting examples
-which you may find useful.
-The bibliography database, {\tt uwthesis.bib}, contains instructions
-to BibTeX to create and format the bibliography.
-You can find the latest of these files on:
+%
+%  Parts
+%
+\def\@makeparthead#1{ \vspace*{2pc} {\centering
+ \ifnum \c@secnumdepth >\m@ne \large Part \thepart \par
+ \vspace{10\p@} \fi 
+  \uwsinglespace
+  \large\bf \uppercase\expandafter{#1}\par
+ \nobreak \vspace{20\p@}} }
+%
+\def\@makesparthead#1{ \vspace*{2pc} {\centering
+ \large\bf \uppercase\expandafter{#1}\par
+ \nobreak \vspace{20\p@}} }
+%
+\def\part{%
+   \printchapternotes
+   \if@openright\cleardoublepage\else\clearpage\fi
+   % \thispagestyle{empty}%
+   \global\@topnum\z@
+   \@afterindenttrue
+   % \let\\\relax
+   \secdef\@part\@spart}
+%
+%  Complication is added here to allow line breaks
+%  in the part titles (via \\).
+%
+\def\@part[#1]#2{
+  \ifnum \c@secnumdepth >\m@ne
+  \refstepcounter{part}
+  \typeout{<<\thepart>>}
+  {\def\\{ }  % allow \\ in title
+   \addcontentsline{toc}{part}{\protect
+     \numberline{Part\ \thepart:}#1}}\else
+  {\def\\{ }  % allow \\ in title
+   \addcontentsline{toc}{part}{#1}}\fi
+ \addtocontents{lof}{\protect\addvspace{5\p@}}
+ \addtocontents{lot}{\protect\addvspace{5\p@}}
+ \if@twocolumn
+  \@topnewpage[\@makeparthead{#2}]
+  \else \@makeparthead{#2}
+  \@afterheading \fi}
+\def\@spart#1{\if@twocolumn \@topnewpage[\@makesparthead{#1}]
+  \else \@makesparthead{#1}
+  \@afterheading\fi}
 
-\begin{itemize}
-\item My page.
-\begin{description}
-\item[] \verb%http://staff.washington.edu/fox/tex/uwthesis.html%
-\end{description}
 
-\item CTAN
-\begin{description}
-\item[]  \verb%http://tug.ctan.org/tex-archive/macros/latex/contrib/uwthesis/%
-\item[]  (not always as up-to-date as my site)
-\end{description}
+%
+%  Chapter headings
+%
+\def\@makechapterhead#1{ \vspace*{2pc} {\centering
+ \ifnum \c@secnumdepth >\m@ne \large \@chapapp{} \Thechapter \par
+ \vspace{10\p@} \fi 
+  \uwsinglespace
+  \large\bf \uppercase\expandafter{#1}\par
+ \nobreak \vspace{20\p@}} }
+%
+\def\@makeschapterhead#1{ \vspace*{2pc} {\centering
+ \large\bf \uppercase\expandafter{#1}\par
+ \nobreak \vspace{20\p@}} }
+%
+\def\chapter{%
+   \printchapternotes
+   \if@openright\cleardoublepage\else\clearpage\fi
+   % \thispagestyle{empty}%
+   \global\@topnum\z@
+   \@afterindenttrue
+   % \let\\\relax
+   \secdef\@chapter\@schapter}
+%
+%  Complication is added here to allow line breaks
+%  in the chapter titles (via \\).
+%
+\def\@chapter[#1]#2{
+  \ifnum \c@secnumdepth >\m@ne
+  \refstepcounter{chapter}
+  \typeout{<<\thechapter>>}
+  {\def\\{ }  % allow \\ in title
+   \addcontentsline{toc}{chapter}{\protect
+     \numberline{\@chapapp\ \thechapter:}#1}}\else
+  {\def\\{ }  % allow \\ in title
+   \addcontentsline{toc}{chapter}{#1}}\fi
+ \addtocontents{lof}{\protect\addvspace{5\p@}}
+ \addtocontents{lot}{\protect\addvspace{5\p@}}
+ \if@twocolumn
+  \@topnewpage[\@makechapterhead{#2}]
+  \else \@makechapterhead{#2}
+  \@afterheading \fi}
+\def\@schapter#1{\if@twocolumn \@topnewpage[\@makeschapterhead{#1}]
+  \else \@makeschapterhead{#1}
+  \@afterheading\fi}
+%
+%  Section headings
+%
+\renewcommand\section{%
+  \@startsection {section}{1}{\z@}%
+       {-3.5ex \@plus -1ex \@minus -.2ex}%
+       {2.3ex \@plus.2ex}%
+       {\def\baselinestretch{1.0}\reset@font\normalsize\bfseries\slshape}}
+\renewcommand\subsection{%
+  \@startsection{subsection}{2}{\z@}%
+       {-3.25ex\@plus -1ex \@minus -.2ex}%
+       {1.5ex \@plus .2ex}%
+       {\reset@font\normalsize\mdseries\itshape}}
+\renewcommand\subsubsection{%
+  \@startsection{subsubsection}{3}{\z@}%
+       {-3.25ex\@plus -1ex \@minus -.2ex}%
+       {1.5ex \@plus .2ex}%
+       {\reset@font\normalsize\mdseries\itshape}}
 
-\end{itemize}
+% part
+\renewcommand\l@part[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{75\p@}%
+    \@dottedtocline{0}{\z@}{\@tempdima}{#1}{#2}%
+  \fi}
 
-\vita{Jim Fox is a Software Engineer with IT Infrastructure Division at the University of Washington.
-His duties do not include maintaining this package.  That is rather
-an avocation which he enjoys as time and circumstance allow.
+%
+%  Provide for `Chapter ' in the toc
+%  (increase \@tempdima)
+%
+\renewcommand\l@chapter[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{75\p@}%
+    \@dottedtocline{0}{\z@}{\@tempdima}{#1}{#2}%
+  \fi}
 
-He welcomes your comments to {\tt fox@uw.edu}.
+% 
+% extra space between toc entries
+%
+\def\@dottedtocline#1#2#3#4#5{%
+  \ifnum #1>\c@tocdepth \else
+    \vskip -\baselineskip % \@plus.2\p@%
+    \vskip 1.2\baselineskip
+    {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+     \parindent #2\relax\@afterindenttrue
+     \interlinepenalty\@M
+     \leavevmode
+     \@tempdima #3\relax
+     \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+     {#4}\nobreak
+     \leaders\hbox{$\m@th
+        \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+        mu$}\hfill
+     \nobreak
+     \hb@xt@\@pnumwidth{\hfil\normalfont \normalcolor #5}%
+     \par}%
+  \fi}
+
+%
+% ------ Special captions ---------------------
+%
+% \caption[]{text} produces normal caption and numbering
+% \caption(-){(continued)} produces `(continued)' caption and 
+%        same-as-last caption number
+% \caption(x)[]{text} produces lettered caption.  1.1a, 1.1b, ...
+%        If (x) is (a) or (A) then caption number is incremented,
+%        else it is same numbered.
+
+\def\thecaptionletter{}
+\newif\ifcaptiontotoc\captiontotoctrue
+
+\def\caption{\@ifnextchar({\@specialcaption}{\@normalcaption}}
+
+\def\@normalcaption{\refstepcounter\@captype \@dblarg{\@caption\@captype}}
+\def\@specialcaption(#1){%
+  \def\thecaptionletter{#1}%
+  \captiontotocfalse
+  \if#1-\def\thecaptionletter{}\fi
+  \if#1a\refstepcounter\@captype\captiontotoctrue\fi
+  \if#1A\refstepcounter\@captype\captiontotoctrue\fi
+  \@dblarg{\@caption\@captype}}
+
+\long\def\@caption#1[#2]#3{\par
+  \ifcaptiontotoc
+    \addcontentsline{\csname
+    ext@#1\endcsname}{#1}{\protect\numberline{\csname
+    the#1\endcsname}{\ignorespaces #2}}%
+  \fi
+  \begingroup
+    \@parboxrestore
+    \def\baselinestretch{1.0}
+    \normalsize  % UW grad school doesn't allow \footnotesize
+    \@makecaption{\csname fnum@#1\endcsname
+        \thecaptionletter}{\ignorespaces #3}\par
+  \endgroup}
+
+\def\@listI{\leftmargin\leftmargini \parsep 7\p@ plus 3\p@ minus 1\p@\topsep
+ 12\p@ plus 5\p@ minus 6\p@\itemsep 7\p@ plus 3\p@ minus 1\p@}
+ 
+ 
+%
+%  ----  Facing pages and double-page figures and tables
+%
+%  \begin{fullpage} ... \end{fullpage}
+%  \begin{leftfullpage} ... \end{leftfullpage}
+%  \begin{xtrafullpage} ... \end{xtrafullpage}
+
+\newif\if@LP \@LPfalse
+\newif\if@XP \@XPfalse
+
+\newbox\@@wholepage
+\def\fullpage{\setbox\@@wholepage=\vbox\bgroup}
+\def\endfullpage{\egroup\dp\@@wholepage\z@
+   \vbox to\textheight{\vss\unvbox\@@wholepage\vss}}
+\def\leftfullpage{\setbox\@@wholepage=\vbox\bgroup}
+\def\endleftfullpage{\egroup\dp\@@wholepage\z@
+   \vbox to\textheight{\vss\unvbox\@@wholepage\vss}\global\@LPtrue}
+
+\if@twoside
+   \typeout{Formatting for twoside printing.}
+   \let\xtrafullpage\fullpage
+   \let\endxtrafullpage\endfullpage
+\else
+   \def\xtrafullpage{\setbox\@@wholepage=\vbox\bgroup}
+   \def\endxtrafullpage{\egroup\dp\@@wholepage\z@
+      \vbox to\textheight{\vss\unvbox\@@wholepage\vss}\global\@XPtrue}
+\fi
+
+\let\oldend@float\end@float
+\def\end@float{%
+  \if@LP\global\@namedef{LP:\expandafter\string\@currbox}{L}%
+  \else \global\@namedef{LP:\expandafter\string\@currbox}{z}%
+  \fi
+  \if@XP\global\@namedef{XP:\expandafter\string\@currbox}{X}%
+  \else \global\@namedef{XP:\expandafter\string\@currbox}{z}%
+  \fi
+  \global\@LPfalse
+  \global\@XPfalse
+  \oldend@float
 }
 
 
-\end{document}
+\if@twoside
+
+% reject a left-side float that appears on an odd page
+ \let\old@xtryfc\@xtryfc
+ \def\@xtryfc #1{%
+   \expandafter\if\csname LP:\string#1\endcsname L%
+      % \typeout{facing page in xtryfc}%
+      \ifodd\count0\global\@colht\z@
+          \typeout{I moved a leftpage float from page \the\count0.}%
+      \fi\fi
+    \old@xtryfc #1}
+
+\else
+
+\def\unstep@page{\addtocounter{page}{-1}}
+
+% flip a facing page caption
+ \let\@oldwtryfc\@wtryfc
+ \def\@wtryfc #1{%
+  \expandafter\if\csname LP:\string#1\endcsname L\gdef\LP@page{}%
+      \typeout{Encountered a facing page.}%
+   \fi
+  \expandafter\if\csname XP:\string#1\endcsname X\gdef\XP@page{}%
+      \typeout{Encountered an extra page.}%
+   \fi
+   \@oldwtryfc #1}
+
+ \let\old@outputpage\@outputpage
+ \def\@outputpage{%
+   \begingroup
+   \@ifundefined{LP@page}
+     {\let\@themargin\oddsidemargin \let\@thehead\@oddhead}
+     {\let\@themargin\evensidemargin \let\@thehead\@evenhead
+       \typeout{Printing a left-hand one-side page.}%
+       \global\let\LP@page\relax
+      }
+   \@ifundefined{XP@page}
+     {}
+     {\let\@thehead\@empty \let\@thefoot\@empty
+       \typeout{Printing an extra page.}%
+       \global\let\XP@page\relax
+       \aftergroup\unstep@page
+      }
+   \old@outputpage\endgroup
+ }
+\fi
+
+%
+%  ----  Preliminary pages  ---------------------------
+%
+\def\prelimpages{ % sets page numbering for the preliminary pages
+   \pagestyle{empty} % will be {plain} at start of toc
+   \pagenumbering{roman}
+   \setcounter{page}{1}
+   \footskip 30\p@ % allowance for the roman page numbers
+    \advance\textheight by-\footskip  
+   }
+%
+%      (The following macros are used once and discarded)
+%
+%  Title page
+%
+%  (Defaults are for dissertation.  See \MasterThesis below.)
+%
+\def\Title#1{\gdef\@Title{#1}}
+\def\Author#1{\gdef\@Author{#1}}
+\def\Year#1{\gdef\@Year{#1}}  \Year{\year}
+\def\Degree#1{\gdef\@Degree{#1}} \Degree{Doctor of Philosophy}
+\def\Program#1{\gdef\@Program{#1}} \Program{your program here}
+%
+\def\School#1{\gdef\@School{#1}} \School{University of Washington}
+\def\GSchool#1{\gdef\@GSchool{#1}} \GSchool{Graduate School}
+\def\Degreetext#1{\gdef\@Degreetext{#1}} 
+  \Degreetext{A dissertation\\ submitted in partial fulfillment of the\\requirements for the degree of}
+\def\Programtext#1{\gdef\@Programtext{#1}}  
+       \Programtext{Program Authorized to Offer Degree: }
+
+\def\textofCommittee#1{\gdef\@textofCommittee{#1}}  
+       \textofCommittee{Reading Committee: }
+\def\textofDate#1{\gdef\@textofDate{#1}}  \textofDate{Date}
+
+\def\textofChair#1{\gdef\@textofChair{#1}}
+       \textofChair{Chair of the Supervisory Committee: }
+
+\newcount\@Chair \@Chair0
+\def\Chair#1#2#3{
+  \global\@namedef{C:\expandafter\the\@Chair}{#1}
+  \global\@namedef{T:\expandafter\the\@Chair}{#2}
+  \global\@namedef{D:\expandafter\the\@Chair}{#3}
+  \ifnum\@Chair>0\textofChair{Co-Chairs of the Supervisory Committee:}\fi
+  \global\advance\@Chair by1}
+
+
+\newcount\@Sign\@Sign0
+\def\Signature#1{
+  \global\@namedef{S:\expandafter\the\@Sign}{#1}
+  \global\advance\@Sign by1}
+
+ 
+\def\copyrightpage{                   % Prints the copyright page
+    \vspace{7pc}
+    \begin{center}
+      \par\vskip\z@ plus4fill\relax
+      \copyright Copyright \@Year
+      \par
+      \@Author
+      \par\vskip\z@ plus2fill\relax
+    \end{center}
+  \let\copyrightpage\relax\relax}
+ 
+\def\titlepage{                   % Prints the title page
+    \cleardoublepage
+    \vspace{7pc}
+    \begin{center}
+      {\uwsinglespace\Large
+      \lineskip 3ex
+      \@Title\par}
+      \par\vskip\z@ plus4fill\relax
+      \@Author
+      \par\vskip\z@ plus4fill\relax
+      {\uwsinglespace
+      \@Degreetext\par}
+      \par\vskip\z@ plus2fill\relax
+      \@Degree
+      \par\vskip\z@ plus2fill\relax
+      \@School
+      \par\vskip\z@ plus1fill\relax
+      \@Year
+      \par\vskip\z@ plus4fill\relax
+
+      % signers
+      \@textofCommittee \par 
+      \count1=0
+      \@whilenum \count1<\@Chair \do
+       {\vskip12\p@ \baselineskip12pt
+        \csname C:\the\count1\endcsname, Chair
+        \advance\count1 by1}
+      \count1=0
+      \@whilenum \count1<\@Sign \do
+       {\vskip12\p@ \baselineskip12pt
+        \csname S:\the\count1\endcsname
+        \advance\count1 by1}
+
+      \par\vskip\z@ plus4fill\relax
+       {\uwsinglespace
+      \@Programtext \par \@Program\par}
+      \par\vskip\z@ plus1fill\relax
+    \end{center}
+     \vspace{2pc}\relax
+  \let\titlepage\relax}
+ 
+
+%
+%   Abstract
+%
+%  normal parameters
+\def\textofAbstract#1{\gdef\@textofAbstract{#1}}  \textofAbstract{Abstract}
+
+\newsavebox\abs@savebox% (\abs@savebox compliments of blerner@cs.washington.edu)
+\long\def\abstract#1{
+   \cleardoublepage
+   \begin{center}
+      \@School
+      \par\vskip1pc
+      {\bf\@textofAbstract}%
+      \par\vskip1pc
+      {\uwsinglespace \@Title \par}
+      \par\vskip1pc
+      \@Author
+      \par\vskip1pc
+       {\uwsinglespace
+      \@textofChair
+      \par 
+      \count1=0
+      \@whilenum \count1<\@Chair \do
+       {% \vskip12\p@ \baselineskip12pt
+        \csname T:\the\count1\endcsname\ \csname C:\the\count1\endcsname
+        \par \csname D:\the\count1\endcsname\par\vskip6\p@
+        \advance\count1 by1}
+       \par}
+      \par\vskip1pc
+   \end{center}
+%  if you need single sided abstract pages uncomment this section and the next
+%   \if@twoside
+%    \begingroup % have to set multiple abstract pages 1-sided
+%    \def\@blankpage{\if\@@blankpage B
+%            \setbox\abs@savebox\box255\shipout\vbox{}\setbox255\box\abs@savebox
+%            \global\advance\count\z@ by1\fi
+%            \global\def\@@blankpage{B}}
+%    \def\@@blankpage{A}
+%    \output=\expandafter{\expandafter\@blankpage\the\output}
+%   \fi
+   #1
+   \vfill\clearpage
+%   \if@twoside\endgroup\fi
+   \let\abstract\relax}
+%
+%
+%   Table of contents (right side page) (always page `i')
+%
+%
+\def\textofToC#1{\gdef\@textofToC{#1}}  \textofToC{Table of Contents}
+\def\tableofcontents{\cleardoublepage
+   \chapter*{\@textofToC\@mkboth{}{}}
+   \pagestyle{plain}
+   \thispagestyle{plain}
+   \setcounter{page}{1}
+   \hbox to\textwidth{\hfill Page}
+   {\let\footnotemark\relax  % in case one is in the title
+    \uwsinglespace
+   \@starttoc{toc}
+    }
+   }
+%
+%   List of figures
+%
+
+\def\textofLoF#1{\gdef\@textofLoF{#1}}  \textofLoF{List of Figures}
+\def\listoffigures{\chapter*{\@textofLoF\@mkboth{}{}}
+   \thispagestyle{plain}
+   \addcontentsline{toc}{chapter}{\protect\@textofLoF}
+   \hbox to\textwidth{Figure Number \hfill Page}
+   {\let\footnotemark\relax  % in case one is in the title
+    \uwsinglespace
+   \@starttoc{lof}
+    }
+   }
+%
+%   List of tables
+%
+\def\textofLoT#1{\gdef\@textofLoT{#1}}  \textofLoT{List of Tables}
+\def\listoftables{\chapter*{\@textofLoT\@mkboth{}{}}
+   \thispagestyle{plain}
+   \addcontentsline{toc}{chapter}{\protect\@textofLoT}
+   \hbox to\textwidth{Table Number \hfill Page}
+   {\let\footnotemark\relax  % in case one is in the title
+    \uwsinglespace
+   \@starttoc{lot}
+    }
+   }
+%
+%  Bibliography
+%
+\def\textofBIB#1{\gdef\@textofBIB{#1}}  \textofBIB{Bibliography}
+\def\thebibliography#1{\chapter*{\@textofBIB\@mkboth{}{}}
+ \addcontentsline{toc}{chapter}{\protect\@textofBIB}
+ \list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \uwsinglespace
+ \sfcode`\.=1000\relax}
+ 
+%
+%   Acknowledgments
+%
+\def\textofAck#1{\gdef\@textofAck{#1}}  \textofAck{Acknowledgments}
+\long\def\acknowledgments#1{\chapter*{\@textofAck\@mkboth{}{}}
+   \thispagestyle{plain}
+   #1\par
+   \vfill
+   \let\acknowledgments\relax}
+ 
+%
+%   Dedication
+%
+\def\textofDed#1{\gdef\@textofDed{#1}}  \textofDed{Dedication}
+\long\def\dedication#1{\chapter*{\@textofDed\@mkboth{}{}}
+   \thispagestyle{plain}
+   #1\par
+   \vfill
+   \let\dedication\relax}
+ 
+%
+%   Vita
+%
+\def\textofVita#1{\gdef\@textofVita{#1}}  \textofVita{Vita}
+\long\def\vita#1{\chapter*{\@textofVita\@mkboth{}{}}
+   #1\par
+   \vfill
+   \let\vita\relax}
+ 
+%
+%   Gratis definition of a glossary environment
+%
+\renewenvironment{glossary}
+  {\begin{list}{}{\setlength\itemindent{\parindent}
+   \def\makelabel##1{\footnotesize\uppercase{##1:}\hfill}\uwsinglespace}}
+  {\end{list}}
+
+% End of the thesis style
 
