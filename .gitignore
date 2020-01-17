@@ -3,7 +3,10 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
-
+data/
+bert-vocab-builder/
+ALBERT/
+openwebtext.*
 # Other files and folders
 .settings/
 
