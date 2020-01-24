@@ -1,76 +1,97 @@
- 
-Bibtex (bib) file for the thesis style document.
- 
-@string{Knuth="Donald E. Knuth"}
- 
-@book{book,
-   author = knuth,
-   title = "The {\TeX} book",
-   publisher = "Addison-Wesley",
-   year = 1984}
- 
-@book{Tbook,
-   author = knuth,
-   title = "{\TeX}: The Program",
-   publisher = "Addison-Wesley",
-   year = 1986}
- 
-@book{Metafont,
-   author = knuth,
-   title = "The Metafont book",
-   publisher = "Addison-Wesley",
-   year = 1986}
- 
-@book{CMT,
-   author = knuth,
-   title = "Computer Modern Typefaces",
-   publisher = "Addison-Wesley",
-   year = 1986}
- 
-@book{Lbook,
-   author = "Leslie Lamport",
-   title = "{\LaTeX}: A Document Preparation System",
-   edition = "2nd",
-   publisher = "Addison-Wesley",
-   year = 1994}
- 
-@book{companion,
-   author = "M{ichel} Goossens and F{rank} Mittelbach and A{lexander} Samarin",
-   title = "The {\LaTeX} Companion",
-   publisher = "Addison-Wesley",
-   year = 1994}
- 
-@article{TUG:h-l,
-  author = "Editor",
-  title = "Hyphenation Exception Log",
-  journal = "TUGboat",
-  volume = 7,
-  number = 3,
-  year = 1986,
-  pages = "145"}
- 
- 
-@book{Hamlet,
-   author = "William Shakespeare",
-   title = "Hamlet",
-   publisher = "F.S.~Crofts~\&~Co., Inc.",
-   address = "NY",
-   year = 1946,
-   note = "Act~I, Scene~3, Lines~70-72, are apropos."}
- 
-Following author fields is not standard
-@book{JTeX,
-   author = "{Spivak, M.D., Ph.D.}",
-   title = "The Joy of {\TeX}",
-   publisher = "American Mathematical Society",
-   address = "RI",
-   year = 1986}
- 
-@book{PCTeX,
-   author = "{Spivak, M.D., Ph.D.}",
-   title = "PC{\TeX}\ Manual",
-   publisher = "Personal {\TeX}, Inc.",
-   address = "CA",
-   year = 1985}
- 
- 
+@inproceedings{Pennington2014GloveGV,
+  title={Glove: Global Vectors for Word Representation},
+  author={Jeffrey Pennington and Richard Socher and Christopher D. Manning},
+  booktitle={EMNLP},
+  year={2014}
+}
+@article{Mikolov2013EfficientEO,
+  title={Efficient Estimation of Word Representations in Vector Space},
+  author={Tomas Mikolov and Kai Chen and Gregory S. Corrado and Jeffrey Dean},
+  journal={CoRR},
+  year={2013},
+  volume={abs/1301.3781}
+}
+@article{Weizenbaum1966ELIZAA,
+  title={ELIZA — a computer program for the study of natural language communication between man and machine},
+  author={Joseph Weizenbaum},
+  journal={Commun. ACM},
+  year={1966},
+  volume={26},
+  pages={23-28}
+}
+@inproceedings{opennmt,
+  author    = {Guillaume Klein and
+               Yoon Kim and
+               Yuntian Deng and
+               Jean Senellart and
+               Alexander M. Rush},
+  title     = {OpenNMT: Open-Source Toolkit for Neural Machine Translation},
+  booktitle = {Proc. ACL},
+  year      = {2017},
+  url       = {https://doi.org/10.18653/v1/P17-4012},
+  doi       = {10.18653/v1/P17-4012}
+}
+@misc{wang2019jiant,
+    author = {Alex Wang and Ian F. Tenney and Yada Pruksachatkun and Katherin Yu and Jan Hula and Patrick Xia and Raghu Pappagari and Shuning Jin and R. Thomas McCoy and Roma Patel and Yinghui Huang and Jason Phang and Edouard Grave and Haokun Liu and Najoung Kim and Phu Mon Htut and Thibault F\'evry and Berlin Chen and Nikita Nangia and Anhad Mohananey and Katharina Kann and Shikha Bordia and Nicolas Patry and David Benton and Ellie Pavlick and Samuel R. Bowman},
+    title = {\texttt{jiant} 1.2: A software toolkit for research on general-purpose text understanding models},
+    howpublished = {\url{http://jiant.info/}},
+    year = {2019}
+}
+@article{Bahdanau2014NeuralMT,
+  title={Neural Machine Translation by Jointly Learning to Align and Translate},
+  author={Dzmitry Bahdanau and Kyunghyun Cho and Yoshua Bengio},
+  journal={CoRR},
+  year={2014},
+  volume={abs/1409.0473}
+}
+@inproceedings{Luong2015EffectiveAT,
+  title={Effective Approaches to Attention-based Neural Machine Translation},
+  author={Thang Luong and Hieu Pham and Christopher D. Manning},
+  booktitle={EMNLP},
+  year={2015}
+}
+@inproceedings{McCallum2000MaximumEM,
+  title={Maximum Entropy Markov Models for Information Extraction and Segmentation},
+  author={Andrew McCallum and Dayne Freitag and Fernando C Pereira},
+  booktitle={ICML},
+  year={2000}
+}
+
+@article{Peters2018DeepCW,
+  title={Deep Contextualized Word Representations},
+  author={Matthew E. Peters and Mark Neumann and Mohit Iyyer and Matt Gardner and Christopher Clark and Kenton Lee and Luke Zettlemoyer},
+  journal={ArXiv},
+  year={2018},
+  volume={abs/1802.05365}
+}
+@misc{Gokaslan2019OpenWeb,  
+	title={OpenWebText Corpus},
+	author={Aaron Gokaslan and Vanya Cohen},
+	howpublished{\url{http://Skylion007.github.io/OpenWebTextCorpus}}, 
+	year={2019}
+}
+@misc{peters2018deep,
+    title={Deep contextualized word representations},
+    author={Matthew E. Peters and Mark Neumann and Mohit Iyyer and Matt Gardner and Christopher Clark and Kenton Lee and Luke Zettlemoyer},
+    year={2018},
+    eprint={1802.05365},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+@article{DBLP:journals/corr/abs-1810-04805,
+  author    = {Jacob Devlin and
+               Ming{-}Wei Chang and
+               Kenton Lee and
+               Kristina Toutanova},
+  title     = {{BERT:} Pre-training of Deep Bidirectional Transformers for Language
+               Understanding},
+  journal   = {CoRR},
+  volume    = {abs/1810.04805},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1810.04805},
+  archivePrefix = {arXiv},
+  eprint    = {1810.04805},
+  timestamp = {Tue, 30 Oct 2018 20:39:56 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1810-04805},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
