@@ -99,20 +99,20 @@
   year={2018},
   volume={abs/1802.05365}
 }
-  
-
-
-
-
-
-
-
-
+@misc{Gokaslan2019OpenWeb,  
+	title={OpenWebText Corpus},
+	author={Aaron Gokaslan and Vanya Cohen},
+<<<<<<< HEAD
+=======
+	howpublished={\url{http://Skylion007.github.io/OpenWebTextCorpus}}, 
+>>>>>>> fd51b8a809dc380dee4478c3c1fbf1b970de7498
+	year={2019}
+}
 @misc{peters2018deep,
     title={Deep contextualized word representations},
     author={Matthew E. Peters and Mark Neumann and Mohit Iyyer and Matt Gardner and Christopher Clark and Kenton Lee and Luke Zettlemoyer},
     year={2018},
-    eprint={1801.05365},
+    eprint={1802.05365},
     archivePrefix={arXiv},
     primaryClass={cs.CL}
 }
