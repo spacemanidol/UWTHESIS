@@ -60,6 +60,53 @@
 
 \textpages
 \chapter {Introduction}
+Following the explosion stemming from the release of BERT, many methods have been explored to improve what langauge models can learn. Methods like KnowBERT \cite{Peters2019KnowledgeEC}
+Since words were represented by a single vector these numerical representations struggled to account for context and words with multiple meanings. Athiwaratkun et al 2017 \cite{Athiwaratkun2017MultimodalWD} explore methods using Gaussian mixtures which helps caputre expressive semantic information and performs better in situations with polesymy  
+Since training large LM takes days if not weeks researchers have produced novel training methods which allow complete training of a model like BERT in little over an hour \cite{You2019LargeBO}. The main method of schocastic optimization, LAMB, is able to increase batch sizes to over 30,000. 
+
+8 Tesla P100 gpus for 29 hours 
+
+Pretrained word representations
+-collobert and weston 2008, mikolov 2013
+
+Wordpiece tokens Sennrich 2016, Wu 2016
+
+We will be describing Contextual Word Represenation building of Smith et al 2019 \cite{Smith2019ContextualWR} 
+
+
+
+The goal of any language is to convey information. To measure the average amount of information conveyed in a message, we use a metric called “entropy", proposed by Claude Shannon . It should be noted that entropy in the context of language is related to, but not the same as, entropy in the context of thermodynamics.
+
+
+An intuitive explanation of entropy for languages comes from Shannon himself in his landmark paper “Prediction and Entropy of Printed English" :
+
+“The entropy is a statistical parameter which measures, in a certain sense, how much information is produced on the average for each letter of a text in the language. If the language is translated into binary digits (0 or 1) in the most efficient way, the entropy is the average number of binary digits required per letter of the original language."
+
+
+1. Discrete words
+    integerized so each word gets a unique number
+    integer assigned means nothing. integers cannot provide any value about similarity or relatedness. Makes each word an independent feature
+    Allows each word to take the same amount of memory and makes processing simple
+    just gives a word a value in a lookup table
+2. Words as vectors
+    using integerized words words can now become vectors because each entry(say a sentence) is a collection of integers. 
+    Prime for feature engineering
+    Stemming 
+    Good for surpiveised machine learning 
+    vector for each word can be one hot, can be assigned values based on information coming from Wordnet
+
+3. Words as distributional Vectors:Context as a meaning\
+    Word2Vec
+    allows a notion of similarity and cluserting
+    the words meaning is distributed across a whole vector. 
+    "underlying all word vector algorithms is the notion that the value placed in each dimension of each word type vector is a parameter that will be optimized to fir the patterns of words in the data. 
+    concept of pretrained on a corpus usually executed by someone else who spends the compute
+    possible to retrofit data from expert sources like wordnet 
+
+4. Contextual word Vectors
+    Words have different meaning in different contexts. 
+    Contextualize the word based on an abritrarily large context window
+
 Shortly after the computer was introduced the research community was already imagining high levels of artificial intelligence. Early systems like ELIZA \cite{Weizenbaum1966ELIZAA} were designed to interact with humanity through verbal communication. In the decades that have elapsed we have grown to understand fundamental concepts about the structure of language and how best to model it. When word representations like Word2Vec \cite{Mikolov2013EfficientEO} and Glove \cite{Pennington2014GloveGV} were introduced, the Natural Language Processing(NLP) world was ushered into a new era. By providing general and task agnostic vector based representation for words, researchers began to push the boundaries on what language based systems could do. Using these word representations systems could now take advantage of the closeness of words and apply these representation to sub tasks in NLP State of the Art performance on common tasks like parsing and part of speech tagging TODO:CITE improved greatly and seemed to reach a new ceiling in language representation quality. \\ While these systems drove incredible improvement and research in the field, since representations focused on word level vector values, systems were unable to represent word as it different in context. The word fly was represented by the same vector independent if the context was dealing with an insect, an action, or a description of personal style. More recently, large scale language models like Elmo \cite{Peters2018DeepCW}, BERT, and GPT have provided methods of representing language in a context dependent way. These methods proved so effective that 2019 was by many considered the year long standing benchmarks were beaten. Inspired by the success of these initial language models, researchers started to tune and tweak the input data, the training methods, and training lengths producing a consistent string of new SOTAs. As the model experimentation continued it became clear that huge gains could be had by altering how the systems learned and what they learned. Efforts in model size alteration produced systems like MEGATRON, T5, and RoBERTA, while task reformulations like StructBERT. Each method produced a wildly different representation method which could be optimized to their desired task. Despite their differences all models proved difficult to train and required massive compute and long training times.   \\
 At the same time NLP researchers were exploring neural methods for text representations the computer vision and deep learning community was exploring the concept of Generative Adversarial Networks(GAN) \cite{}. GANs are a deep learned method based on game theory where there is a Generator and a Discriminator. In training of a GAN a generator is optimized around producing samples within the distribution of the training data while the discriminator optimizes around classifying samples as within the dataset or not. The method is incredibly simple and has opened the way for machined learned systems to create. While the concept of these networks is simple, as the target output and dataset size grows so does the difficulty in training. There have been many successful methods in optimizing training of GANs \cite{}, \cite{}, \cite{}, with one of the most relevant being the progressive training of both the Discriminator and the Generator \cite{}. Unlike previous approaches and most traditional machine learned methods, Progressively trains models by increasing the size of the target output as training progresses. Initially, the Generator is generator is producing 2x2 pixel images. Once it and the Discriminator converge, the target output size is increased. This progressive training continues until the Generator is producing 4096 x 4096 images. By training in an increasingly entropic way, the Generator is able to continually learn an increasingly complex goal. \\
 Much like large, realistic images, language can prove difficult to model. As a result, the goal of this paper is to explore the effect of progressive training on a variety of language representations.
