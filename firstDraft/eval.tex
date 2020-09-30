@@ -1,0 +1,37 @@
+\section{Evaluation}
+
+\subsection{}
+\subsection{Downsteam Evaluation}
+-Glue, SuperGLue, Squad, 
+\iffalse
+
+GLUE: A MULTI-TASK BENCHMARK AND ANALYSIS PLATFORM FOR NATURAL LANGUAGE UNDERSTANDING
+-General Language Understanding  a collection of NLU tasks including question answering, sentiment analysis,
+and textual entailment, and an associated online platform for model evaluation, comparison, and
+analysis
+-collection of CoLa(Corpus of Lingustic Acceptability) SST-2 The Stanford Sentiment Treebank movie reveiew sentiment detection, MRPC The Microsoft Research Paraphrase Corpus paraphrase corpus, STS-B The Semantic Textual Similarity Benchmark sentence similairy, QQP The Quora Question Pairs about duplicate question detection, MLNI The Multi-Genre Natural Language Inferenc textual entailment(give premise and hypothesis say if they entail, contradict, or neither)
+-QNLI Stanford Question answering dataset) aka squad. Task has been converted into sentence pair classification determine wether the context sentence conatins the answer to the question. 
+-RTE Recognizing Textual Entailment (RTE) datasets come from a series of annual textual entailment challenges.
+-WNLI Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task
+in which a system must read a sentence with a pronoun and select the referent of that pronoun from
+a list of choices.
+-Tasks offer a wide range of metrics, dataset size, and optimization focused. 
+-Possed as open ended evaluation pipeline for all models. 
+-Baseline BiLSTM using 300D Glove embeddings(840b common crawl example), ELMO and Cove based augmentations also created. Best is ELMo + Attention(barely 0.1% over plain elmo for single task and 2.3 for multi task)
+
+
+jiant: A Software Toolkit for Research on General-Purpose Text Understanding Models
+-Jiant is an open source tool for conducting multi task and transfer learning experiments in english. 
+-jiant implements over 50 NLU tasks, including all GLUE and SuperGLUEbenchmark tasks
+-Ease of use: jiant should allow users to run a variety of experiments using state-of-the-art models via an easy to use configuration-driveninterface. 
+-jiant has task with have different data, processing methods, classifiers and performance metrics.
+-Sentence encoders(for my experiments elmo) which are used to ensure the sentence representations is consisent in the experiment.
+-Task specific output heads(including their loss function)
+-Trainer which deals with batching of multi task, evaluation, save points, learning rates, etc
+-configs which store all the information needed to run jiant. The idea is to run a jiant experiment all you need is a config file.
+Entropy Rate Constancy in Text
+-Entropy is a measure of information. there is a proportion to the difficulty of correctly guessing the value of this variable. Entropy is high when all variables are equally probably and lowest when the system is deterministic. 
+-Authors propose a method to explore entropy in text and speech. The random variable is a unit of text(usually a word). The quantity of total options is the amount of words in the text. 
+-To estimate the entropy of a sentence we compute the log prob of s where P(S) = P(w1)*P(w2|w1)*P(w3|ww2w1).... Which estimates the cross entropy between model and true distribution. Do this for N-grams
+-Ablation study: each element slowly improves the performance downstream. In SQUAD aE only our performes AR. in text classification AE only and AR 0only does better. 
+\fi

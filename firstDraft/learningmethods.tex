@@ -1,0 +1,100 @@
+\section{Learning Methods}
+In this section, we first briefly review some leaning methodologies for neural network in section 3.1.1 so as to formalize what learning methods seek to achieve. Then, in section 3.1.2 we introduce Curriculum learning and describe a few implementation related to NLP. For a more comprehensive review, reader can refer to Blagh. 
+\subsection{Brief Overview of learning methodologies}
+Neural Networks are usually trained by randomly selecting batches of data in a training corpus. This method is an extremely effective way of producing a model that represents the data but can at times be cost/compute prohibitive and some problem formalization's do not work well with methodology. Methods like Curriculum Learning \cite{Bengio2009CurriculumL}, reinforcement learning \cite{Sutton1998ReinforcementLA}, and active learning \cite{Cohn1994ActiveLW} have been used across many domains to speed up model training and accuracy. Most methods, at their core seek to optimize what kind of information a model has access to at each step in training with the goal of allowing it to find better gradients than a random sample. In domains like Generative Adversarial Networks(GAN) \cite{Goodfellow2014GenerativeAN} training models that generate large images has proven difficult. Seeing structure in the size of images, researchers have found tremendous improvements in training models with progressively more complex data. Unlike previous approaches and most traditional machine learned methods, Progressively trains models by increasing the size of the target output as training progresses\cite{Karras2017ProgressiveGO}. Unlike previous approaches and most traditional machine learned methods, Progressively trains models by increasing the size of the target output as training progresses. Initially, the Generator is generator is producing 2x2 pixel images. Once it and the Discriminator converge, the target output size is increased. This progressive training continues until the Generator is producing 4096 x 4096 images. By training in an increasingly entropic way, the Generator is able to continually learn an increasingly complex goal. By training progressively the final model is able to learn a better representation with a higher sample efficiency. This work on progressive learning in GANS is what inspired this dissertation as LM, much like GANs, are conceptually simple but can prove difficult to train at scale. 
+\subsection{Curriculum Learning}
+\iffalse
+\subsection{Curriculum Learning}
+Curriculum LEarning (Bengio et al 2009)
+-Focus on by choosing which examples are presented and which order a system can be guided and learn quicker. 
+-Exploited by shaping (Skinner 1958, Peterson 2004, Krueger & dayan 2009)
+-Earliest training machine learning with curriculum is elman 1993 where experiments in having a small RNN learn a grammar suggest that to learn complex grammatical structure depends on starting with a limited restricted architecture and expand as the model elarns. 
+-Krueger & Dayan 2009 provide evidence for faster convergence via training set shaping
+-Sanger 1994 explore this concept in robotics by gradually making the task more difficult
+-To explore if methods of growing the dataset size in complexity and diversity can help networks the authors focus their work by studying problems which have solutions in local minima that are almost impossible to find via random initialization. Their experiments suggest that (BOLD) pretraining with a curriculum may act similairly to unsupervised pretraining. It does not appear they explored the effects of any curriculum unsupervised pre training.
+-Define some difficulty measure (lambda) from 0 to 1. Then create experiments to study how various defined ML problems work on it.
+-Three experiments, Perceptron to learn an equation(which curriculum get better loss on), shape recognition, which 2 stage curriculm has higher accuracy, and Language models covered below.
+-Proposes active selection where the model choses its examples based on what it can learn most from.
+-Their methodology for Language modeling is to loop over the same corpus each time with an expanding vocabulary size(top5k tokens, top10k tokens,...,topN tokens) This will be initial experiment I can run while I work on the data loader. For each curriculum step skip anything outside of the vocabulary distribution. 
+-After 1 billion updates the Curriculum learned method has a loss of 2.78 vs 2.83.
+-In their LM experiment they treat 1 full pass over the data as 1 curriculum step. 
+-Curriculum learning guides the optimization process to converge faster and guide the learner to a better local minimal
+-Curriculum learning is generally a rewighting of the training distribution. 
+Rethinking Curriculum Learning with Incremental Labels and Adapative Compensation
+-Moves from crriculum learning to have a curriculum of labels as opposed to samples(One could say BERT is already exploring curriculum learning with various pre-training tasks)
+-Authors state "simple batch learning often fails to find solutions that are simultaneously stable, highly generalizable and scalable to large systems. 
+-Authors state that this is because of how mini batches are constructed. The assumtipon of a dataset is an emphasis of equal contribution from each data point regardless of the underlying distributuion.
+-Small batch size help achieve more generalizable solutions but do not scale as well to large computation as large batches. 
+-Issues with curriculum learning is the computational cost to assemble the batch and the effective amount of data the model can learn from in early epochs is decreased.
+-Authors introduce LILAC(Learning with Incremental labels and adaptive compensation) which is a label based curriculum method. Work is focused on images
+-The strategy relies on introducing incremental amount of groups of labels in the training sample. For all items that do not yet have examples the model uses a fake label class for 'Items not seen' and
+-Authors believe this method allows the model to develop a strong understanding of each class by constrating the correct class examples against a large and diverse set of negative samples.
+-After first stage, adaptive compensation phase is initiated. This method they adaptively replace the target one-hot vector of incorrectly classified samples with a softer distribition. This avoids adjusting labels across the entire dataset. 
+-Their experiments are on 3 well known image benchmarks
+-Their method increase accuracy and decrease standard deviation across tasks. Evaluated on CIFAR-10, CIFAR-100 and STL-10. LILAC ontop of all the architecture they tried out performs initial model evaluation
+-In Ablation the adaptive compensation has a larger effect than their label based curriculum.
+Learning a Multitask curriculum for neural machine translation
+-Data selection methods are quite common in MMT. Methods have explored measuing the relevance of training sample to a target task mostly focused on data selection for specific domains. 
+-It has also been used to selecct clean data. 
+-Authors focus on creating a single curriculum given a diverse noisy dataset. It computes multiple data selection scores for each training example and measure how useful the example is to a given task. 
+-Formulate curriculumum learning formally as a selection od data (Y|X), where y is the translationf ro x and Qt(y|x) is a rew-weighting of the training distribition P(Y|Y)
+-At step t on online learner randomly samples a data batch from Qt to train the model on. Various alternatives have been introduced to evolve training critearea over time focused on exposing early traiing to a diversity of samples and later models to subsets more relevant to final task. This produces better in domain models that doesn't generalize out of domain as well. 
+-Existing methods:In first step of curriculum learning the lerner randomly samples from all examples uniformly (3 degrees of in domain type data). In second stage disregard the most out of domain samples, and same with 3rd stage. Sampling is uniform at each step but the data gradually adapt to to task
+-Their method: select data that is relevant to all tasks and disregard that which is only relevant to specific domains. This means before training they compute a relevance score for each training example and every domain they are training towards. They do this by assigning each sample a weighted score per instance(representing all domains), sorting the data and taking the top N.
+-During curriculum training, they introduce an exponential decaying function lambda(t)=0.5^t/(H) where H is a hyperparameter that controls how fast the function is annealing. 
+-For their experiment they use multiple English to French translation corpuses(Paracrawl and WMT14) and train oracles with single task curricula optimized for various splits of the evaluation data
+-When compared to non multi task curriculum learning their model bring 2.5 BLEU point improvement and performs about the same as the per task oracle curriculum learners 
+
+On The power of Curriculum Learning in Training Deep networks
+-Apply curriculum learning on image recognition. They break the task tdown into a scoring function which determines the difficulty of each sample in the data(This is where I will vary my scoring function). The scoring function makes it possible to sort data by difficulty and present the easy examples soon
+-Second function is the pacing function determine the pace of which data is presented to the network. The pace depends on the data and the learner itself. 
+-They show that varying of pacing functions effects the hyperparameter in the NN itself with an effect simlair to an increase learning rate. 
+-Arguably main challenge is to obtain an effective scoring function without addtional labeling of the data. Approaches include Knowledge transfer(transfer learning) and boostrapping based on self tutoring( we train the network without curriculum then use the resulting classifier to rank the training data in order to train the network from scratch)
+-Three pacing functions are investigated. Fixed exponential pacing(which presents the learner intially with a small spercentage of the data, increasing the amount exponentially every fixed number of learning iterations. 
+-Varied Exponential pacing: allows  the numbers of iterations in each step to vary as well. 
+-Single-step pacing:  A easy version of the dataset is sampled first then the whole data(1 step curriculum. )
+-Their experiments show that curriculum learning changes the optimization landscape making it steeper while maintaining the same global minimum of the oroginal problem.
+-Their version of the curriculum learning takes the whole sequence of mini batches and the sorts in assencing order of difficulty. Its also important to try a anti-curriculum algorithm that sorts descending order of difficulty. 
+-Fixed exponential g(i) = min(staring percent * inc^(i/step length),1)*N
+-Experiment of CIFAR-10, CIFAR-100 with VGG based image reconition architecture.
+-First grid search on the curriculum hyperparameter followed by a second grid search on the learning rate parameters. In no curriculum a full 1-st tage grid search is needed. 
+-Grid search on hyperparameters are choses via performance on the test set.(Validation)
+-Curriculum by transer is clearly and significatly benefitial since learning starts faster and convereges to a better solution. Random curriculum is about the same as vanilla so attribute gains to curriculum. 
+-Notice effect of CL being more pronounced on subsets of data that vanilla model does worse on. (Consider looking at error bars on perplexity scores.)
+-Curriculum by bootsrapp more related to self paced learning
+-Effect of self paced also produces a much better network. 
+-In theory self taught boostrapping can be repeated again and again to make a better network but as you keep retraining errors tend to acumulate
+
+Competence-based Curriculum Learning for Neural Machine translation
+-Main idea is training algorithms cn perform better if training data is presented in a specific order, starting from easy examples and moving on to more difficult ones as the learner becomes more competent. 
+-Authors introduce a Curriculum learning system that only has one parameter(how long to have curriculum learning before normal training). They reduce training time by up to 70\% and improves BLEU performance by up to 2.2 points. 
+-Authors define two concepts: difficulty: which is a ranking of a diffiuclty metryic comparable across training samples. Comptetence: value between - and 1 that represents the progress of a learning during its training. 
+-Competence c(t) at time t is defined by the proportion of training data it is allowed to use at that time. Training examples are ranked according to their difficulty and the learner is only allowed to use the top c(t) of them at time t. 
+-In general the authors call for sampling uniformly on all data prior to point of competence. They are not changing the relative probability of each training sample but rather constraning the domain of the the distributiuon based on the current competence of the learner. Once the competence becomes 1 the tra
+-Define 2 difficulty metrics:sentence length, word rarity(word occourences over total tokens in corpus). For each sentence its difficulty is = - Sum (log(p(wi))) in the sentence probability
+-Define 2 competence functions: linear(new samples are constantly introduced at a fixed rate)and Root (sample quickly then slowly to allow model to learn all the new examples). For root they use where co is initial competence, T is amount of time for full competence min(1, sqrt(t*((1-c0^2)/T) + c0^2)). c0 is initialized to 0.01 in all experiments. T is found by calculating the number of training steps it takes to reach 90\% its final BLEU score. (For my work we can look at when it achieves 90\% max perplexity)
+-Their experiments they use bilastm , Transformer, and BILSTM with attention.  on IWSLT and WMT. 
+-They find Transformers benefit a lot and LSTMS  a little bit which likley stems from training RNN is easier and more robust than transformers. Square root model outperforms linear model. 
+-Their curriculum learning approach obstains a better model in 70\% less training time. 
+
+Curriculum Learning for Domain Adaptation in Neural Machine Translation
+-USe similairty scores to arrange training so that more similair batches are seen earlier in training. 
+-Using their domain training approach they see a 3.22 BLEU improvment
+-They use a sharding approach where in each phase of the curriculum only a shard can be used to sample the minibatches from. 
+-Split data in to 40 shards each shard used for 1000 batches.
+Progressive Growing of GANs for Improved Quality Stability and Variation
+-This was the paper that inspired this thesis. 
+-Authors seek to improve training time and quality on a GAN by progressively increasing the difficulty of the task. 
+-As GANS are notrously hard to train for high distribution images because in a high resolution image its easier to tell real vs generated samples apart which makes getting a good training gradient difficult.
+-Large Batches also need small minibacthes due to memory constrainsts which compromisies training stability. 
+-Primary contributuon is that they can grow both the Generator and the Discriminator starting with low resolution images and introduce more layers to introduce higher resolution details in the training process. Result is faster training and higher quality. The
+-They evaluate on CELEBA, CIFAR10, LSUN. Best published inception score on CIFAR10.
+-Create higher resultion datasets for CELEBA than exist otherswise. 1024x1024
+--Observe progressive training has various benefits. Fewer modes and less class distribution. In practice it stabilizes the training sufficiently for us to reliably synthesize megapixel scale images.
+-They start training a 4x4 image and gradually add layers to G and D thus increasing the resolution.
+-Most iterations happen at lower resolutions and quality results 2-6 times faster. 
+-Work is based on the observation that complex mapping from latents to high resolutions images is easier to learn in steps. 
+-In future work I would attemp to do this while increasing the amount of transformers, attention heads with the target being the sentence length.
+-They start with a batch size of 16 for resolution of 4^2-128^2 and then decrease teh size according to 256^2-> 14, 512^2->6 1024^2 ->3
+-For each layer, they train by training for 800k samples, fade in another layer for 800k samples, and repeat. 
+/fi

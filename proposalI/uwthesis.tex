@@ -1,192 +1,65 @@
-%  ========================================================================
-%  Copyright (c) 1985 The University of Washington
-%
-%  Licensed under the Apache License, Version 2.0 (the "License");
-%  you may not use this file except in compliance with the License.
-%  You may obtain a copy of the License at
-%
-%      http://www.apache.org/licenses/LICENSE-2.0
-%
-%  Unless required by applicable law or agreed to in writing, software
-%  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-%  See the License for the specific language governing permissions and
-%  limitations under the License.
-%  ========================================================================
-%
-\documentclass [11pt, proquest] {uwthesis}[2020/08/20]
-\setcounter{tocdepth}{1} 
-\usepackage{alltt}  % 
-\newenvironment{demo}
-  {\begin{alltt}\leftskip3em
-     \def\\{\ttfamily\char`\\}%
-     \def\{{\ttfamily\char`\{}%
-     \def\}{\ttfamily\char`\}}}
-  {\end{alltt}}
-\let\mffont=\sf
+\documentclass[11pt,a4paper]{article}
+\usepackage[hyperref]{acl2020}
+\usepackage{times}
+\usepackage{tabularx}
+\usepackage{latexsym}
+\usepackage{microtype}
+\renewcommand{\UrlFont}{\ttfamily\small}
+\newcommand{\comment}[1]{\textcolor{red}{\bf \small [#1]}}
+\newcommand{\spacemanidol}[1]{\textcolor{orange}{\bf \small [#1 --dc]}}
+\aclfinalcopy 
+\setlength\titlebox{5cm}
+\newcommand\BibTeX{B\textsc{ib}\TeX}
+\title{Final Thesis Proposal: Curriculum Learning methods In Training Methods For Language Representations}
+\author{Daniel Campos}
 \begin{document}
-\prelimpages
-\raggedbottom
-\Title{Explorations In Entropy Based Training Methods For Language Representation}
-\Author{Daniel Campos}
-\Year{2020}
-\Program{Department of Linguistics}
-\Degree{Master of Science}
-\Chair{Shane Steinert-Threlkeld}{Assistant Professor}{Department of Linguistics}
-\Signature{Chenyan Xiong}
-\Signature{Yan Song}
-
-%\copyrightpage
-
-\titlepage  
-
-\setcounter{page}{-1}
-%\abstract{blah}
- 
-
-%\tableofcontents
-%\listoffigures
-%\listoftables 
-%\chapter*{Glossary} 
-%\addcontentsline{toc}{chapter}{Glossary}
-%\thispagestyle{plain}
-%\begin{glossary}
-%\item[LM] a language model
-%\end{glossary}
- 
-%\acknowledgments{The author wishes to express sincere appreciation to University of Washington, the City of Seattle, and coffee.}
-
-%\dedication{\begin{center}To my wife, Zoe\end{center}}
-
-\textpages
-\chapter {Introduction}
-
-Shortly after the computer was introduced the research community was already imagining high levels of artificial intelligence. Early systems like ELIZA \cite{Weizenbaum1966ELIZAA} were designed to interact with humanity through verbal communication. In the decades that have elapsed we have grown to understand fundamental concepts about the structure of language and how best to model it. When word representations like Word2Vec \cite{Mikolov2013EfficientEO} and Glove \cite{Pennington2014GloveGV} were introduced, the Natural Language Processing(NLP) world was ushered into a new era. By providing general and task agnostic vector based representation for words, researchers began to push the boundaries on what language based systems could do. Using these word representations systems could now take advantage of the closeness of words and apply these representation to sub tasks in NLP State of the Art performance on common tasks like parsing and part of speech tagging TODO:CITE improved greatly and seemed to reach a new ceiling in language representation quality. \\ While these systems drove incredible improvement and research in the field, since representations focused on word level vector values, systems were unable to represent word as it different in context. The word fly was represented by the same vector independent if the context was dealing with an insect, an action, or a description of personal style. More recently, large scale language models like Elmo \cite{Peters2018DeepCW}, BERT, and GPT have provided methods of representing language in a context dependent way. These methods proved so effective that 2019 was by many considered the year long standing benchmarks were beaten. Inspired by the success of these initial language models, researchers started to tune and tweak the input data, the training methods, and training lengths producing a consistent string of new SOTAs. As the model experimentation continued it became clear that huge gains could be had by altering how the systems learned and what they learned. Efforts in model size alteration produced systems like MEGATRON, T5, and RoBERTA, while task reformulations like StructBERT. Each method produced a wildly different representation method which could be optimized to their desired task. Despite their differences all models proved difficult to train and required massive compute and long training times.  \\
-At the same time NLP researchers were exploring neural methods for text representations the computer vision and deep learning community was exploring the concept of Generative Adversarial Networks(GAN) cite. GANs are a deep learned method based on game theory where there is a Generator and a Discriminator. In training of a GAN a generator is optimized around producing samples within the distribution of the training data while the discriminator optimizes around classifying samples as within the dataset or not. The method is incredibly simple and has opened the way for machined learned systems to create. While the concept of these networks is simple, as the target output and dataset size grows so does the difficulty in training. There have been many successful methods in optimizing training of GANs cite, cite, cite with one of the most relevant being the progressive training of both the Discriminator and the Generator cite Unlike previous approaches and most traditional machine learned methods, Progressively trains models by increasing the size of the target output as training progresses. Initially, the Generator is generator is producing 2x2 pixel images. Once it and the Discriminator converge, the target output size is increased. This progressive training continues until the Generator is producing 4096 x 4096 images. By training in an increasingly entropic way, the Generator is able to continually learn an increasingly complex goal. \\
-
-Following the explosion stemming from the release of BERT, many methods have been explored to improve what langauge models can learn. Methods like KnowBERT \cite{Peters2019KnowledgeEC}
-Since words were represented by a single vector these numerical representations struggled to account for context and words with multiple meanings. Athiwaratkun et al 2017 \cite{Athiwaratkun2017MultimodalWD} explore methods using Gaussian mixtures which helps caputre expressive semantic information and performs better in situations with polesymy  
-Since training large LM takes days if not weeks researchers have produced novel training methods which allow complete training of a model like BERT in little over an hour \cite{You2019LargeBO}. The main method of schocastic optimization, LAMB, is able to increase batch sizes to over 30,000. 
-
-8 Tesla P100 gpus for 29 hours 
-
-Pretrained word representations
--collobert and weston 2008, mikolov 2013
-
-Wordpiece tokens Sennrich 2016, Wu 2016
-
-We will be describing Contextual Word Represenation building of Smith et al 2019 \cite{Smith2019ContextualWR} 
-
-
-
-The goal of any language is to convey information. To measure the average amount of information conveyed in a message, we use a metric called “entropy", proposed by Claude Shannon . It should be noted that entropy in the context of language is related to, but not the same as, entropy in the context of thermodynamics.
-
-
-An intuitive explanation of entropy for languages comes from Shannon himself in his landmark paper “Prediction and Entropy of Printed English" :
-
-“The entropy is a statistical parameter which measures, in a certain sense, how much information is produced on the average for each letter of a text in the language. If the language is translated into binary digits (0 or 1) in the most efficient way, the entropy is the average number of binary digits required per letter of the original language."
-
-
-1. Discrete words
-    integerized so each word gets a unique number
-    integer assigned means nothing. integers cannot provide any value about similarity or relatedness. Makes each word an independent feature
-    Allows each word to take the same amount of memory and makes processing simple
-    just gives a word a value in a lookup table
-2. Words as vectors
-    using integerized words words can now become vectors because each entry(say a sentence) is a collection of integers. 
-    Prime for feature engineering
-    Stemming 
-    Good for supervised machine learning 
-    vector for each word can be one hot, can be assigned values based on information coming from Wordnet
-
-3. Words as distributional Vectors:Context as a meaning\
-    Word2Vec
-    allows a notion of similarity and cluserting
-    the words meaning is distributed across a whole vector. 
-    "underlying all word vector algorithms is the notion that the value placed in each dimension of each word type vector is a parameter that will be optimized to fir the patterns of words in the data. 
-    concept of pretrained on a corpus usually executed by someone else who spends the compute
-    possible to retrofit data from expert sources like wordnet 
-
-4. Contextual word Vectors
-    Words have different meaning in different contexts. 
-    Contextualize the word based on an abritrarily large context window
-
-Shortly after the computer was introduced the research community was already imagining high levels of artificial intelligence. Early systems like ELIZA \cite{Weizenbaum1966ELIZAA} were designed to interact with humanity through verbal communication. In the decades that have elapsed we have grown to understand fundamental concepts about the structure of language and how best to model it. When word representations like Word2Vec \cite{Mikolov2013EfficientEO} and Glove \cite{Pennington2014GloveGV} were introduced, the Natural Language Processing(NLP) world was ushered into a new era. By providing general and task agnostic vector based representation for words, researchers began to push the boundaries on what language based systems could do. Using these word representations systems could now take advantage of the closeness of words and apply these representation to sub tasks in NLP State of the Art performance on common tasks like parsing and part of speech tagging TODO:CITE improved greatly and seemed to reach a new ceiling in language representation quality. \\ While these systems drove incredible improvement and research in the field, since representations focused on word level vector values, systems were unable to represent word as it different in context. The word fly was represented by the same vector independent if the context was dealing with an insect, an action, or a description of personal style. More recently, large scale language models like Elmo \cite{Peters2018DeepCW}, BERT, and GPT have provided methods of representing language in a context dependent way. These methods proved so effective that 2019 was by many considered the year long standing benchmarks were beaten. Inspired by the success of these initial language models, researchers started to tune and tweak the input data, the training methods, and training lengths producing a consistent string of new SOTAs. As the model experimentation continued it became clear that huge gains could be had by altering how the systems learned and what they learned. Efforts in model size alteration produced systems like MEGATRON, T5, and RoBERTA, while task reformulations like StructBERT. Each method produced a wildly different representation method which could be optimized to their desired task. Despite their differences all models proved difficult to train and required massive compute and long training times.   \\
-At the same time NLP researchers were exploring neural methods for text representations the computer vision and deep learning community was exploring the concept of Generative Adversarial Networks(GAN) \cite{}. GANs are a deep learned method based on game theory where there is a Generator and a Discriminator. In training of a GAN a generator is optimized around producing samples within the distribution of the training data while the discriminator optimizes around classifying samples as within the dataset or not. The method is incredibly simple and has opened the way for machined learned systems to create. While the concept of these networks is simple, as the target output and dataset size grows so does the difficulty in training. There have been many successful methods in optimizing training of GANs \cite{}, \cite{}, \cite{}, with one of the most relevant being the progressive training of both the Discriminator and the Generator \cite{}. Unlike previous approaches and most traditional machine learned methods, Progressively trains models by increasing the size of the target output as training progresses. Initially, the Generator is generator is producing 2x2 pixel images. Once it and the Discriminator converge, the target output size is increased. This progressive training continues until the Generator is producing 4096 x 4096 images. By training in an increasingly entropic way, the Generator is able to continually learn an increasingly complex goal. \\
->>>>>>> fd51b8a809dc380dee4478c3c1fbf1b970de7498
-Much like large, realistic images, language can prove difficult to model. As a result, the goal of this paper is to explore the effect of progressive training on a variety of language representations.
-\section {Goals}
-Explore training of language representations like Word2Vec, Glove, Sent2Vec, BERT, ELMO, ETC when trained on the same corpus and evaluated on a wide variety of benchmarks.
--Explore methods of progressive learning focused on selecting an increasingly complex textual sample.
--Evaluate linguistic properties of what each system can learn given various techniques of sample selection.
--At its core this method is seeking to explore and challenge the random sampling which is at the core of much of modern day deep learning and machine learning. 
-\section {Challenges}
--What dataset to use?
--Time/Cost to train each of these networks
--Robustness to different inputs
--Reproducibility
--Adversarial attacks.
-\chapter{Related Works}
- means central paper
-\section{List of Papers}
-\subsection{Transformers}
-Universal Transformers \\
-Attention is All You Need \\
-Levenshtein Transformers \\
-Transformers XL \\ 
-\subsection{GANs}
-Progressive Growing of GANs for Improved Quality, Stability, and Variation *
-\subsection{Learning Theory}
-Information BottleNeck Method*
-ELECTRA: Pre-Traning Text Encoders as Discriminators Rather than Generators*\\
-LSTMs Exploit Linguistic Attributes of Data\\
-Uniform convergence may be unable to explain generalization in deep learning \\
-Smaller Models, Better Generalization \\ 
-Stabilizing the Lotterry Ticket Hypothesis \\
-One ticket to win them all:generalizing lottery ticket initializations across datasets and optimizers. \\ 
-Network Pruning via Transformable Architecture Search
-
-\subsection{Language Representations}
-StarSpace:Embed All The Things!\\
-Glove \\
-Word2Vec \\
-Multimodal Word Distributions\\
-ELMO*\\
-BERT* \\
-GPT\\
-GPT-2*\\
-RoBERTA \\
-ALBERT*\\
-DISTILLBERT*\\
-Retrofitting Word Vectors to Semantic Lexicons \\
-What the Vec? Towards Problematically grounded Embeddings \\
-Specializing Word Embeddings (for Parsing) by information Bottleneck *\\
-Knowledge Enhaced Contextual Word Represenations
+\maketitle
+\section{Introduction}
+Representing the underlying meaning of language through textual representations has been a longstanding research area in Natural Language Processing (NLP). Initially, researchers treated words as discrete integrated units where each word was assigned a numerical value. These representations provided a clean and simple way to encode meaning in a space-efficient way but were unable to capture underlying meanings of words or context surrounding them.  Seeking to encode more information about common word attributes, the NLP community explored vectorizing information about each word in manually crafted representations like WordNet \cite{Miller1992WordNetAL}. These representations encoded manually crafted linguistic properties of language which provided models some notion of language structure and similarity which systems could leverage downstream. Seeking to include context-based on textual corpus word meaning representations like Word2Vec \cite{Mikolov2013EfficientEO} and GloVe \cite{Pennington2014GloveGV} trained fixed vector representations using unsupervised machine learning methods. Using these methods, researchers built new methods to classical problems that took advantage of the closeness of words vector space. These fixed vector representations greatly improved the performance of many NLP systems but they struggled to adequately represent words with multiple meanings(e.g. fly or bat) or include sentence specific context. \\
+Neural Language Models(NLMs) like ELMO \cite{Peters2018DeepCW} introduced the broader NLP community to contextual word representations and initiated a Cambrian Explosion research into novel language representations. Then, researchers leveraging the transformer's \cite{Vaswani2017AttentionIA} ability to capture long term dependencies, models like GPT \cite{Radford2018ImprovingLU} and BERT \cite{Devlin2019BERTPO} became the field standard for language and development in downstream tasks which provided new state of the art models in areas like Question answering \cite{Devlin2019BERTPO}, Paraphrase Detection \cite{Wang2018GLUEAM}, and information retrieval \cite{Nogueira2019MultiStageDR} to name a few. The success of NLMs drove research to countless new representation methods like AlBERT \cite{Lan2019ALBERTAL}, RoBERTa \cite{Liu2019RoBERTaAR}, SPANBERT\cite{Joshi2019SpanBERTIP} and KBBERT \cite{Peters2019KnowledgeEC}, what these representations learn \cite{Liu2019LinguisticKA}, \cite{Clark2019WhatDB} and how to evaluate them \cite{Talmor2019oLMpicsO}, \cite{Wang2018GLUEAM}. \\
+As NLMs have become a field staple research into improving NLMs has exploded in popularity and has brought increased performance, size, training time and complexity. Top research labs invested millions of dollars in training models like MEGATRON \cite{Shoeybi2019MegatronLMTM}, XL-NET \cite{Yang2019XLNetGA}, Turing-NLG \cite{Rosset2020TNLG} which require 500+ top of the line GPU/TPUs and take days to train. While increasing model size, dataset size and training time has continued to improve models by most benchmark it leads to a natural question which will be the focus of this thesis: can leveraging approaches in training data selection \cite{Bengio2009CurriculumL} \cite{Karras2017ProgressiveGO} \cite{Tran2020SubsetSF} \cite{Chatterjee2017ProgressiveLF},  \cite{Settles2009ActiveLL}\cite{Berger1996AME} improve NLMs accuracy and training efficiency? Research the efficiency of NLM creation is now more relevant than ever as the current method of scaling architecture is expensive in terms of CO2 emissions, electrical usage, and computer cost  \cite{Strubell2019EnergyAP}. To best study, the effect of various regimes this research will focus on the effect training routines have on ELMO's performance on well-established benchmarks.
+\section{Methods}
+While there does not seem to exist current research on applying anything but random sampling to neural language modeling approaches have been well explored in areas like Generative Adversarial Networks, Machine Translation, and computer vision to varying degrees of success. In GANs training regimes focused on target output image size growth \cite{Karras2017ProgressiveGO} have proven very effective while in machine translation methods around sentence complexity have shown to be the best optimization point. In Machine Translation researchers have used curriculum methods to avoid hyperparameter tuning \cite{Kano2017StructuredBasedCL}, improve training methodology \cite{Guo2019FineTuningBC}, and modifying mini-batch sampling \cite{Kocmi2017CurriculumLA} to varying degrees of effectiveness. As language
+modeling shares a lot with machine translations it will be the focus of literature review but I will still explore on broad methodologies.
+Broadly speaking, since this research can be slow and computationally expensive my experiments will focus on fixing as many variables as possible to best measure the effect of the various curricula on NLMS
+\subsection{Models}
+The modeling required for this experiment breaks into three main areas: dataset creation/sub-sampling, NLM training, and Downstream task training and evaluation. \\
+The dataset sampling methodology will be created using spacy.io and focused on broad, generalizable methods to produce the sub-sample datasets associated with the many training regimes. This methodology needs only to be reproducible since its curriculum creation needs only to happen once and is not bound to any model training. \\ For modeling, I will be using the open-source code released with the original ELMO paper \footnote{https://github.com/allenai/bilm-tf}. To get a broad enough sample I will implement character and token level models with 1, 2 and 4 stacked-layer representations. Since PyTorch does not offer our of the box implementation for curriculum learning I will have to create methods for training regimes. I estimate this will be the bulk of my time along with hyperparameter tuning and exploration in training Learning Rates. \\
+The final and most established portion of experimentation is the evaluation portion. This is described more in-depth in subsequent sections but mostly will leverage existing open-source libraries.
+\subsection{Dataset}
+The majority of this research will be focused on fixing as many variables as possible to ensure we only capture the variations in model quality due to the training regime. To ensure this is captured in our training data all training and some evaluation will be done on the Wiki-103 dataset \cite{Merity2016PointerSM}. Introduced in 2016 the WikiText-103 is a diverse dataset that has become a benchmark for NLM evaluation and training. The dataset is a collection of over 100 million tokens coming from verified good and featured articles on Wikipedia. The dataset features 28,595 articles and has a vocabulary size of 267,735 and has become a central dataset in the field because of its size, the quality of its language and ease of use. This dataset will be used to create various training regimes and sim lair to other NLMS I will measure variations in perplexity on the Test portion of the dataset as a proxy for pure model quality. 
+\subsection{Training Methodologies}
+Broadly speaking my training methodologies will focus on a few sampling methodologies: perplexity, linguistically driven notion of complexity, methods derived from other applications, sample length, and random sample. Since all of my methods are derived on sentence-level complexity learned models may gain an increased understanding of sentence-level representations without an ability to represent longer contexts. As of current, I do not see a way around this dependency as all curriculum learning methods rely on some notion of granularity.\\ The first method, perplexity is likely the simplest to implement is derived from the work of Shannon et Al. \cite{Shannon1951PredictionAE} focused on the perplexity of each sentence in English. Broadly speaking, this method will produce N-sub samples of the broader dataset ordered by perplexity. \\
+In my second method, linguistically driver complexity, I will build sub-samples based on the depth of parse trees. I choose this methodology because it provides a method of separating sentences by varying degrees of dependency complexity. This method should be simplest to introduce as it will rely on using a standard parser on the target corpus.\\
+The third method derived from other existing literature is mostly a placeholder in case I come across a relevant way of data subsampling during my literature. \\
+The fourth and final methods of sampling serve mostly as baselines to provide a good basis to understand the lift my heuristic methods can give. 
 \subsection{Evaluation}
-Language Models as Knowledge Bases\\
-oLMpics - On what Language Model Pre-Training Captures* \\
-Open Sesame: Getting Inside BERT's Linguistic Knowledge. \\
-Visualizing and Measuring the Geometry of BERT. \\
-What Kind of Language Is Hard To Language Model \\
-What Do Recurrent Neural Network Grammars Learn About Syntax? \\
-Capacity, Bandwith, and Compositionality in Emergent Language Learning. * \\
-Probing What Different NLP Tasks Teach Machines About Function Word Comprehension.
-\section{Major Approaches}
-Summary of major approaches in the papers 1-4 pages
-\chapter{Research Approach}
-1 page
-Open web text dataset from \cite{Gokaslan2019OpenWeb}
-\chapter{Evaluation}
-\chapter{Conclusion}
-\section{Summary of Contribution}
-\section{Future Work}
-\printendnotes
+Following the trend in optimizing research cycles most evaluation will focus on the most commonly accepted benchmarks of NLM quality: Model perplexity and effect on downstream task learning. As previously mentioned, to evaluate NLM quality we will measure model perplexity on the test portion of the WikiText-103 dataset. The evaluation will focus on what training regime achieves the lowest perplexity but also on the speed to which each training regime converges on their minima. The other task that will be used for evaluation will be evaluating the various NLM performances when used to train a downstream task. To reproduce the original paper and benchmark broadly with other language models I will use the GLUE \cite{Wang2018GLUEAM} benchmark. It is worth noting that the explicit purpose is not to find the best representation of ELMO but explore the effects various training regimes can have on training time and model performance which can be used to further improve performance on many of the bigger models. 
+\section{Possible Results}
+Based on the effect seen in other uses of active/curriculum learning I believe the explained experiments will capture 2 broad effects: training speed and model quality. While I am unsure of how effective training regimes will be on the model quality I firmly believe that they should at least allow for much quicker training. Based on the broader literature, by training with a curriculum, models are less susceptible to both overfitting and getting stuck in local minima.
+\section{Timeline}
+My main goal is to have explored broadly how training regimes affect neural language models along with gaining a deep understanding in NLMs, how to evaluate their quality, and how methods applied in other fields can be leveraged for NLP. In the table below is my detailed plan for the timeline.
+\clearpage
+\begin{tabularx}{1.01\textwidth} { 
+  | >{\raggedright\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X  | }
+ \hline
+ \textbf{Task} & \textbf{Description} & \textbf{Due Date}  \\
+ \hline
+ Literature Review  &  Broad overview of Language Representations, Transformers, Neural Language Models, Curriculum learning and active learning
+ & {first draft 3/15 \newline
+ tentative final draft 3/30} \\
+ \hline
+ NLM training pipeline & Basic implementations of ELMO in its various configurations training on WikiText-103. Functional evaluation on perplexity and downstream performance on SQUAD. Goal is to approximate the original paper performance & 04/10 \\ \hline
+ Curriculum Creation Pipeline & Dependable and functional implementation of a pipeline that can create various curriculum's given an input corpus. Targeting 5 variations in each of the broad methodologies(perplexity, length, linguistics based on parse tree, method based on Machine Translation work). & 04/30 \\
+ Training of NLMs & Broad training of NLMs with their respective curriculum's along with evaluation metrics. & 05/30\\ \hline
+ 1st Complete Draft & First complete Draft of thesis including all sections & 06/15 \\ \hline
+ 2nd Complete Draft & Second draft with potential additional experiments & 07/15 \\ \hline 
+ Final Draft & Final Draft for review with broader department & 08/15
+\end{tabularx}
+\clearpage
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{uwthesis}
-\appendix
-\raggedbottom\sloppy
-\chapter{Software}
-blah
-\vita{Daniel Campos is a Program Manager At Microsoft where he works on metrics and applied research on the Bing Search Engine. He welcomes your comments to {\tt spacemanidol@gmail.com}.}
 \end{document}
