@@ -1,0 +1,78 @@
+%  ========================================================================
+%  Copyright (c) 1985 The University of Washington
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%  ========================================================================
+%
+\documentclass [11pt, proquest] {uwthesis}[2020/12/20]
+\setcounter{tocdepth}{1} 
+\usepackage{alltt}  % 
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{adjustbox}
+\usepackage{caption} 
+\usepackage{rotating}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\newenvironment{demo}
+  {\begin{alltt}\leftskip3em
+     \def\\{\ttfamily\char`\\}%
+     \def\{{\ttfamily\char`\{}%
+     \def\}{\ttfamily\char`\}}}
+  {\end{alltt}}
+\let\mffont=\sf
+\begin{document}
+\prelimpages
+\raggedbottom
+\Title{Explorations In Curriculum Learning Methods For Training Contextual Language Representation}
+\Author{Daniel Campos}
+\Year{2020}
+\Program{Department of Linguistics}
+\Degree{Master of Science}
+\Chair{Shane Steinert-Threlkeld}{Assistant Professor}{Department of Linguistics}
+\Signature{Emma Strubell}
+\copyrightpage
+\titlepage  
+\setcounter{page}{-1}
+\abstract{Being able to understand language depending on the context of its usage has always been one of the core goals of Natural Language Processing(NLP). Recently, contextual word representations(commonly called language models(LM))like: ELMO, BERT, ELECTRA, and RoBERTA have proven to provide a robust representation of natural language that can be leveraged for a diverse range of downstream tasks. Separately, in many other computer science communities using curriculum learning(CL) methods have proven to be a scalable method of improving model training speed and model performance. While LMs have proven transformational for NLP community the training of these models has proven expensive and difficult. In this thesis we explore the effect of CL in the  training of language models. Using wikitext-2 and wikitext-103 and evaluating word representation transfer learning we find that CL methods produce models can outperform their traditionally trained counterparts  when the training corpus is smaller.}
+\tableofcontents
+\listoffigures
+\listoftables 
+\addcontentsline{toc}{chapter}{Glossary}
+\thispagestyle{plain}
+\begin{glossary}
+\item[LM] a language model
+\item[Curriculum Learning]
+\item[GLUE]
+\item[Curricula]
+\end{glossary}
+ 
+\acknowledgments{The author wishes to express sincere appreciation to his family, The University of Washington, The City of Seattle, and coffee.}
+
+\dedication{\begin{center}To my wife, Zoe.\end{center}}
+
+\textpages
+\input{Thesis/intro}
+\input{Thesis/prior}
+\input{Thesis/method}
+\input{Thesis/results}
+\input{Thesis/conclusion}
+\input{Thesis/futurework}
+\printendnotes
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{uwthesis}
+\appendix
+\raggedbottom\sloppy
+\vita{Daniel Campos is a PhD student at the University of Illinois Urbana-Champaign where he is working on next generation NLP systems focused on chemistry and agriculture. {\tt spacemanidol@gmail.com}.}
+\end{document}
