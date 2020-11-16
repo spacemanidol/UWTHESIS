@@ -1,0 +1,21 @@
+Epochs,value,method
+1,620.45544,wikitext-2 baseline
+2,451.85522,wikitext-2 baseline
+3,358.74582,wikitext-2 baseline
+4,303.83347,wikitext-2 baseline
+5,241.15233,wikitext-2 baseline
+6,221.38237,wikitext-2 baseline
+7,195.55809,wikitext-2 baseline
+8,168.30266,wikitext-2 baseline
+9,162.16602,wikitext-2 baseline
+10,151.25607,wikitext-2 baseline
+1,758.29285,wikitext-2 Bengio Style
+2,507.58508,wikitext-2 Bengio Style
+3,445.0215,wikitext-2 Bengio Style
+4,424.0015,wikitext-2 Bengio Style
+5,364.40637,wikitext-2 Bengio Style
+6,395.8324,wikitext-2 Bengio Style
+7,213.29416,wikitext-2 Bengio Style
+8,181.99895,wikitext-2 Bengio Style
+9,163.70233,wikitext-2 Bengio Style
+10,153.26689,wikitext-2 Bengio Style
