@@ -1,4 +1,4 @@
-Epochs,value,method
+Epochs,Perplexity,Curriculum
 1,83.05149,wikitext-103 baseline
 2,56.865345,wikitext-103 baseline
 3,48.632687,wikitext-103 baseline
@@ -9,13 +9,13 @@ Epochs,value,method
 8,37.64779,wikitext-103 baseline
 9,37.009693,wikitext-103 baseline
 10,34.412056,wikitext-103 baseline
-1,227.65094,wikitext-103 Bengio Style
-2,138.29044,wikitext-103 Bengio Style
-3,113.23114,wikitext-103 Bengio Style
-4,100.1231,wikitext-103 Bengio Style
-5,92.03778,wikitext-103 Bengio Style
-6,90.143585,wikitext-103 Bengio Style
-7,39.72011,wikitext-103 Bengio Style
-8,38.672005,wikitext-103 Bengio Style
-9,40,wikitext-103 Bengio Style
-10,39.029747,wikitext-103 Bengio Style
+1,227.65094,wikitext-103 CRS
+2,138.29044,wikitext-103 CRS
+3,113.23114,wikitext-103 CRS
+4,100.1231,wikitext-103 CRS
+5,92.03778,wikitext-103 CRS
+6,90.143585,wikitext-103 CRS
+7,39.72011,wikitext-103 CRS
+8,38.672005,wikitext-103 CRS
+9,40,wikitext-103 CRS
+10,39.029747,wikitext-103 CRS

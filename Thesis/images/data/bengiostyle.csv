@@ -1,4 +1,4 @@
-Epochs,value,method
+Epochs,Perplexity,Curriculum
 1,620.45544,wikitext-2 baseline
 2,451.85522,wikitext-2 baseline
 3,358.74582,wikitext-2 baseline
@@ -19,23 +19,23 @@ Epochs,value,method
 8,37.64779,wikitext-103 baseline
 9,37.009693,wikitext-103 baseline
 10,36.412056,wikitext-103 baseline
-1,758.29285,wikitext-2 Bengio Style
-2,507.58508,wikitext-2 Bengio Style
-3,445.0215,wikitext-2 Bengio Style
-4,424.0015,wikitext-2 Bengio Style
-5,364.40637,wikitext-2 Bengio Style
-6,395.8324,wikitext-2 Bengio Style
-7,213.29416,wikitext-2 Bengio Style
-8,181.99895,wikitext-2 Bengio Style
-9,163.70233,wikitext-2 Bengio Style
-10,153.26689,wikitext-2 Bengio Style
-1,227.65094,wikitext-103 Bengio Style
-2,138.29044,wikitext-103 Bengio Style
-3,113.23114,wikitext-103 Bengio Style
-4,100.1231,wikitext-103 Bengio Style
-5,92.03778,wikitext-103 Bengio Style
-6,90.143585,wikitext-103 Bengio Style
-7,39.72011,wikitext-103 Bengio Style
-8,38.672005,wikitext-103 Bengio Style
-9,37.66034,wikitext-103 Bengio Style
-10,37.029747,wikitext-103 Bengio Style
+1,758.29285,wikitext-2 CRS
+2,507.58508,wikitext-2 CRS
+3,445.0215,wikitext-2 CRS
+4,424.0015,wikitext-2 CRS
+5,364.40637,wikitext-2 CRS
+6,395.8324,wikitext-2 CRS
+7,213.29416,wikitext-2 CRS
+8,181.99895,wikitext-2 CRS
+9,163.70233,wikitext-2 CRS
+10,153.26689,wikitext-2 CRS
+1,227.65094,wikitext-103 CRS
+2,138.29044,wikitext-103 CRS
+3,113.23114,wikitext-103 CRS
+4,100.1231,wikitext-103 CRS
+5,92.03778,wikitext-103 CRS
+6,90.143585,wikitext-103 CRS
+7,39.72011,wikitext-103 CRS
+8,38.672005,wikitext-103 CRS
+9,37.66034,wikitext-103 CRS
+10,37.029747,wikitext-103 CRS
