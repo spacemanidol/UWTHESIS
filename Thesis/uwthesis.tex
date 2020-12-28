@@ -49,7 +49,7 @@
 \copyrightpage
 \titlepage  
 \setcounter{page}{-1}
-\abstract{Understanding language depending on the context of its usage has always been one of the core goals of natural language processing. Recently, contextual word representations created by language models like ELMo, BERT, ELECTRA, and RoBERTA have provided robust representations of natural language which serve as the language understanding component for a diverse range of downstream tasks like information retrieval, question answering, and information extraction. The use of curriculum learning is a method that employs a structured training regime instead of the traditional random sampling. Research areas like computer vision and machine translation have used curriculum learning methods in model training to improve model training speed and model performance. While language models have proven transformational for the natural language processing community, these models have proven expensive, energy-intensive, and challenging to train, which has inspired researchers to explore new training methods. In this thesis, we explore the effect of curriculum learning in the training of language models. Using wikitext-2 and wikitext-103 and evaluating word representation transfer learning , we find that curriculum learning methods produce models that outperform their traditionally trained counterparts while the training corpus is small, but as the training corpora scale, the effects of curriculum learning methods become negative.}
+\abstract{Understanding language depending on the context of its usage has always been one of the core goals of natural language processing. Recently, contextual word representations created by language models like ELMo, BERT, ELECTRA, and RoBERTA have provided robust representations of natural language which serve as the language understanding component for a diverse range of downstream tasks like information retrieval, question answering, and information extraction. Curriculum learning is a method that employs a structured training regime instead of the traditional random sampling. Research areas like computer vision and machine translation have used curriculum learning methods in model training to improve model training speed and model performance. While language models have proven transformational for the natural language processing community, these models have proven expensive, energy-intensive, and challenging to train, which has inspired researchers to explore new training methods. In this thesis, we explore the effect of curriculum learning in the training of language models. Using wikitext-2 and wikitext-103 textual datasets and evaluating word representation transfer learning on the GLUE Benchmark, we find that curriculum learning methods produce models that outperform their traditionally trained counterparts when the training corpus is small, but as the training corpora scale, curriculum methods become less effective than traditional stochastic sampling.}
 \tableofcontents
 \listoffigures
 \listoftables 
@@ -64,7 +64,6 @@
 \item[Curriculum Learning (Cl)] A machine learning training method which introduces structure into the training regime with the goal of increasing model performance or sample efficiency.
 \item[Convolutional Neural Network (CNN)] A type of artificial neuron which applies a convolution to certain portion of input data to extract a stronger signal which is commonly used in computer vision.
 \item[Corpus Replacement Style (CRS)] A method of curriculum learning where less common parts of the corpus are replaced to simplify the training data. This method is run independent of model training and is reusable across models which makes it computationally efficient.
-
 \item[Computer Vision (CV)] A field of research which is focused on producing methods which computers can leverage to understand visual inputs.
 \item[Dependency Parse (DEP)] A method for analyzing the grammatical structure of a sentence and establishing relation between words by creating a tree structure which represents how words modify other words.
 \item[Deep Neural Network (DNN)] A connection of artificial neurons which are arranged in consecutive layers which is commonly used in machine learning to learn some underlying function in a target domain.
@@ -90,7 +89,6 @@
 \acknowledgments{The author wishes to express sincere appreciation to his family, his Advisor Shane Steinert-Threlkeld, The University of Washington, The City of Seattle, and coffee. }
 
 \dedication{\begin{center}To my wife, Zoe.\end{center}}
-
 \textpages
 \input{Thesis/intro}
 \input{Thesis/prior}
@@ -106,8 +104,7 @@
 \raggedbottom\sloppy
 \chapter{Experimental Results}
 \label{appendix}
-\section{Validation Perplexity}
-\subsection{Corpus Replacement Style}
+\section{Corpus Replacement Style}
 \begin{table}[!h]
 \begin{tabular}{|l|l|l|l|l|}
 \hline 
@@ -124,9 +121,9 @@ Epochs & baseline wiki-2 & bs wiki-2 & bs wiki-103 & baseline wiki-103 \\ \hline
 10 & 151.25607 & 153.26689 & 37.029747 & 36.412056 \\ \hline 
 \end{tabular}
 \label{table:corpuscurriculaperplexity}
-\caption{Model Perplexity on validation portion of the train corpus.}
+\caption{Validation perplexity of baselines and replacement methods measured every epoch.}
 \end{table}
-\subsection{Competence Based Curricula}
+\section{Competence Based Curriculum}
 \begin{table}
 \begin{tiny}
 \centering
@@ -159,7 +156,7 @@ Batches & Baseline & Random & Dependency & Part of Speech & Unigram & Bigram & T
 2300 & 211236.3 & 89274.6 & 4591.32 & 6133.123 & 60930.05 & 57298.29 & 53007.47 & 7117.323 \\ \hline
 2400 & 23207.46 & 115620.8 & 4978.687 & 5435.751 & 44079.81 & 49065.99 & 81409.19 & 6686.693 \\ \hline
 \end{tabular}
-\caption{Perplexity of each curricula trained on line based wikitext on validation corpus measured every 100 batches}
+\caption{Validation perplexity of each curriculum trained on line based wikitext-2 measured every 100 batches.}
 \label{tab:wikitext2-line-perplexity}
 \end{tiny}
 \end{table}
@@ -210,7 +207,7 @@ Batches & Baseline & Random & Dependency & Part of Speech & Unigram & Bigram & T
 3800 & 5810.9 & 3164.84 & 17406.648 & 3329.6848 & 5049.87 & 3314.212 & 3773.563 & 3204.518 \\ \hline
 3900 & 5575.6 & 2112.18 & 11576.83 & 2928.0552 & 3045.523 & 2490.426 & 2244.873 & 2624.535 \\ \hline
 \end{tabular}
-\caption{Perplexity of each curricula trained on sentence based wikitext-2 on validation corpus measured every 100 batches}
+\caption{Validation perplexity of each curriculum trained on sentence based wikitext-2 measured every 100 batches.}
 \label{tab:wikitext2-sentence-perplexity}
 \end{tiny}
 \end{table}
@@ -273,7 +270,7 @@ Batches & Baseline & Random & Dependency & Part of Speech & Unigram & Bigram & T
 5000 & 533522.1 & 48656.72 & 6969.119 & 9091.118 & 36777.41 & 336925.2 & 313601.7 & 16320.92 \\ \hline
 \end{tabular}
 \end{tiny}
-\caption{Perplexity of each curricula trained on line based wikitext-103 on validation corpus measured every 100 batches. Batches 0-5000}
+\caption{Validation perplexity of each curriculum trained on line based wikitext-103 measured every 100 batches. Batches 0-5000.}
 \label{tab:wikitext-103-line-1}
 \end{table}
 \begin{table}
@@ -335,7 +332,7 @@ Batches & Baseline & Random & Dependency & Part of Speech & Unigram & Bigram & T
 10000 & 55742.19 & 35956.14 & 13261.41 & 8612.109 & 29911.54 & 13082393 & 13093.23 & 6222.705 \\\hline
 \end{tabular}
 \end{tiny}
-\caption{Perplexity of each curricula trained on line based wikitext-103 on validation corpus measured every 100 batches. Batches 5100-10000}
+\caption{Validation perplexity of each curriculum trained on line based wikitext-103 measured every 100 batches. Batches 5100-10000.}
 \label{tab:wikitext-103-line-2}
 \end{table}
 \begin{table}
@@ -366,7 +363,7 @@ Batches & Baseline & Random & Dependency & Part of Speech & Unigram & Bigram & T
 12000 & 103377 & 27182.9 & 7571.237 & 5749.055 & 19494.32 & 14127428 & 6620.839 & 5186.854 \\\hline
 \end{tabular}
 \end{tiny}
-\caption{Perplexity of each curricula trained on line based wikitext-103 on validation corpus measured every 100 batches. Batches 10100-12000}
+\caption{Validation perplexity of each curriculum trained on line based wikitext-103 measured every 100 batches. Batches 10100-12000.}
 \label{tab:wikitext-103-line-3}
 \end{table}
 \begin{table}[]
@@ -432,7 +429,7 @@ Batches & Baseline & Random & Dependency & Part of Speech & Unigram & Bigram & T
 5400 & 3214.4783 & 3224.414 & 4276.697 & 4426.463 & 3902.706 & 7097.28 & 5437.933 & 3852.584 \\ \hline
 5500 & 3932.4114 & 3201.333 & 2812.856 & 3057.271 & 4108.582 & 5330.817 & 7914.916 & 2754.497 \\ \hline
 \end{tabular}
-\caption{Perplexity of each curricula trained on sentence based wikitext-103 on validation corpus measured every 100 batches. First 5500 batches.}
+\caption{Validation perplexity of each curriculum trained on sentence based wikitext-103 measured every 100 batches. First 5500 batches.}
 \label{tab:wikitext-103-sentence-1}
 \end{tiny}
 \end{table}
@@ -498,7 +495,7 @@ Batches & Baseline & Random & Dependency & Part of Speech & Unigram & Bigram & T
 10900 & 3359.8572 & 4426.294 & 2156.759 & 2719.192 & 4010.09 & 3295.575 & 4190.228 & 2470.908 \\ \hline
 \end{tabular}
 \end{tiny}
-\caption{Perplexity of each curricula trained on sentence based wikitext-103 on validation corpus measured every 100 batches. Batches 5600-10900.}
+\caption{Validation perplexity of each curriculum trained on sentence based wikitext-103 measured every 100 batches. Batches 5600-10900.}
 \label{tab:wikitext-103-sentence-2}
 \end{table}
 \begin{table}[]
@@ -565,7 +562,7 @@ Batches & Baseline & Random & Dependency & Part of Speech & Unigram & Bigram & T
 16500 & 5760.409 & 2858.464 & 2046.358 & 1679.481 & 4213.457 & 5952.215 & 2700.678 & 1779.349 \\ \hline
 \end{tabular}
 \end{tiny}
-\caption{Perplexity of each curricula trained on sentence based wikitext-103 on validation corpus measured every 100 batches. Batches 11100-16500}
+\caption{Validation perplexity of each curriculum trained on sentence based wikitext-103 measured every 100 batches. Batches 11100-16500.}
 \label{tab:wikitext-103-sentence-3}
 \end{table}
 \begin{table}[]
@@ -600,45 +597,33 @@ Batches & Baseline & Random & Dependency & Part of Speech & Unigram & Bigram & T
 18900 & 3450.497 & 2346.806 & 1466.698 & 1575.33 & 6894.88 & 3873.480 & 2945.7 & 1504.928 \\ \hline
 \end{tabular}
 \end{tiny}
-\caption{Perplexity of each curricula trained on sentence based wikitext-2 on validation corpus measured every 100 batches. Batches 16600-18900.}
+\caption{Validation perplexity of each curriculum trained on sentence based wikitext-103 measured every 100 batches. Batches 16600-18900.}
 \label{tab:wikitext-103-sentence-4}
 \end{table}
-\subsection{Perplexity Figures}
 \begin{figure}[h]
 \centering
-\label{fig:wikitext-103-sentence}
-\includegraphics[ height=10cm]{Thesis/images/wikitext-103lineall.png}
-\caption{Model perplexity on wikitext103-line by curricula including all models.}
-\end{figure}
-\begin{figure}[h]
-\centering
-\label{fig:wikitext-103-sentence}
-\includegraphics[ height=10cm]{Thesis/images/wikitext-103lineminusbigram.png}
-\caption{Model perplexity on wikitext103-line by curricula including all models except for bigram.}
-\end{figure}
-\begin{figure}[h]
-\centering
-\label{fig:wikitext-103-sentence}
-\includegraphics[ height=10cm]{Thesis/images/wikitext-103lineminusbigrambaseline.png}
-\caption{Model perplexity on wikitext103-line by curricula including all models except for bigram and baseline.}
-\end{figure}
-\begin{figure}[h]
-\centering
-\label{fig:wikitext-103-sentence}
-\includegraphics[ height=10cm]{Thesis/images/wikitext-103lineminusbigrambaselinetrigram.png}
-\caption{Model perplexity on wikitext103-line by curricula including all models except for bigram, baseline and trigram.}
-\end{figure}
-\begin{figure}[h]
-\centering
-\label{fig:wikitext-103-sentence}
-\includegraphics[ height=10cm]{Thesis/images/wikitext-103lineminusbigrambaselinetrigramunigram.png}
-\caption{Model perplexity on wikitext103-line by curricula without baseline or N-gram methods.}
-\end{figure}
-\begin{figure}[h]
-\centering
-\label{fig:wikitext-103-sentence}
 \includegraphics[ height=10cm]{Thesis/images/wikitext-103sentence.png}
-\caption{Model perplexity on wikitext103-sentence with all values.}
+\caption{Validation perplexity of each curriculum trained on sentence based wikitext-103 measured every 100 batches.}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[ height=10cm]{Thesis/images/wikitext-103lineminusbigram.png}
+\caption{Validation perplexity of each curriculum trained on line based wikitext-103 measured every 100 batches. Bigram performance is removed for ease of interpretation.}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[ height=10cm]{Thesis/images/wikitext-103lineminusbigrambaseline.png}
+\caption{Validation perplexity of each curriculum trained on line based wikitext-103 measured every 100 batches. Bigram and Baseline performance is removed for ease of interpretation.}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[ height=10cm]{Thesis/images/wikitext-103lineminusbigrambaselinetrigram.png}
+\caption{Validation perplexity of each curriculum trained on line based wikitext-103 measured every 100 batches. Bigram, trigram, and Baseline performance is removed for ease of interpretation.}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[ height=10cm]{Thesis/images/wikitext-103lineminusbigrambaselinetrigramunigram.png}
+\caption{Validation perplexity of each curriculum trained on line based wikitext-103 measured every 100 batches. Unigram, Bigram, Trigram and Baseline performance is removed for ease of interpretation.}
 \end{figure}
 \vita{Daniel Campos is a PhD student at the University of Illinois Urbana-Champaign where he is working on next generation NLP systems focused on chemistry, agriculture, and truly personal search. {\tt spacemanidol@gmail.com}.}
 \end{document}

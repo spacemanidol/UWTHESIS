@@ -1,6 +1,6 @@
 \section{Language Modeling}
 \label{chap:prior:sec:lm}
-In Section \ref{chap:prior:sec:lm:overview}, we briefly review what language modeling is, various methodologies, and why language modeling is so useful for NLP. Then, in Section \ref{chap:prior:sec:lm:elmo} introduce ELMo followed by BERT in Section \ref{chap:prior:sec:lm:bert}. Then, in Section \ref{chap:prior:sec:lm:otherlm}, we discuss some other major LMs and how the broader NLP community is using them. Finally, in Section \ref{chap:prior:sec:lm:effects}, we discuss some of the effects of training and using large LMs to ground our research's motivation.
+In Section \ref{chap:prior:sec:lm:overview}, we briefly review various language modeling methodologies and why language modeling is so useful for NLP. Then, in Section \ref{chap:prior:sec:lm:elmo} introduce ELMo followed by BERT in Section \ref{chap:prior:sec:lm:bert}. Then, in Section \ref{chap:prior:sec:lm:otherlm}, we discuss other relevant LMs and how the broader NLP community is using them. Finally, in Section \ref{chap:prior:sec:lm:effects}, we discuss some of the effects of training and using large LMs to ground our research's motivation.
 \subsection{What is Language Modeling}
 \label{chap:prior:sec:lm:overview}
 Language modeling is a way to assign a probability distribution over some textual representation. In other words, if the task is to model $n$-grams, the probability of a current input is the probability of a token $w_i$ given the previous $i$ tokens. This is commonly factorized as \fullref{equation:langmodel}:
